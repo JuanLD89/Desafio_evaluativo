@@ -16,7 +16,7 @@ int main()
     cout<<"-Si desea cambiar el nombre de usuario, ingrese al codigo y en la plantilla acceso\nen la funcion llamada accesos, lo puede cambiar"<<endl;
     cout<<"-Ahora si desea cambiar la clave tocaria ir al archivo de texto conocido como sudo y cambiarla"<<"\n\n"<<endl;
     string UserName,clave1;
-    int controlador=0;
+    int a, accion, controlador=0;
     cout << "-Si desea ingresar como administrador ingrese 1, " <<endl;
     cout << "-Si desea ingresar como usuario ingrese 2 " <<endl;
     cin>>controlador;
@@ -31,6 +31,35 @@ int main()
         }
         else {
             cout << "acceso denegado"<<endl;
+        }
+        if (confirmacion==true){
+            cout<<"Si desea ejecutar alguna accion como administrador ingrese 1, de lo contario ingrese otro numero."<<endl;
+            cin>>a;
+            while(a==1){
+                cout<<endl;
+                cout<<"------------------------------------"<<endl;
+                cout<<"|              MENU                |"<<endl;
+                cout<<"------------------------------------"<<endl;
+                cout<<"|1.Ingresar productos al inventario|"<<endl;
+                cout<<"|2.         Crear combos           |"<<endl;
+                cout<<"|3. Reporte de ventas realizadas   |"<<endl;
+                cout<<"|4.            Salir               |"<<endl;
+                cout<<"------------------------------------"<<endl;
+
+                cin >> accion;
+                if (accion==1){
+                    cout<<"-En mantenimiento ";
+                }
+                if (accion==2){
+                    cout<<"-En mantenimiento ";
+                }
+                if (accion==3){
+                    cout<<"-En mantenimiento ";
+                }
+                if (accion==4){
+                    break;
+                }
+            }
         }
     }
 }
