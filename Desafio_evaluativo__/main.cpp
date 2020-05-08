@@ -45,6 +45,7 @@ int main()
                 cout<<"|3. Reporte de ventas realizadas   |"<<endl;
                 cout<<"|4.            Salir               |"<<endl;
                 cout<<"------------------------------------"<<endl;
+                cout<<endl;
 
                 cin >> accion;
                 if (accion==1){
@@ -73,6 +74,27 @@ int main()
         }
         else {
             cout << "acceso denegado"<<endl;
+        }
+        if (confirmacion==true){
+            cout<<"Si desea ejecutar alguna accion como usuario ingrese 1, de lo contario ingrese otra letra"<<endl;
+            cin>>a;
+            while(a==1){
+                cout<<endl;
+                cout<<"------------------------------------"<<endl;
+                cout<<"|              MENU                |"<<endl;
+                cout<<"------------------------------------"<<endl;
+                cout<<"|1.       seleccionar combo        |"<<endl;
+                cout<<"|2.            Salir               |"<<endl;
+                cout<<"------------------------------------"<<endl;
+                cout<<endl;
+                cin >> accion;
+                if (accion==1){
+                   cout<<"-En mantenimiento"<<endl;
+                }
+                if (accion==2){
+                    break;
+                }
+            }
         }
         return 0;
     }
