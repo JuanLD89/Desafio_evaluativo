@@ -65,7 +65,7 @@ int main()
     }
 
     if (controlador==2){
-        cout<<"Ingrese la cedula: ";
+        cout<<"Ingrese el usuario: ";
         cin>>UserName1;
         acceso Usuario;
         confirmacion=Usuario.Desplegar1((UserName1+ ' '));
@@ -76,6 +76,17 @@ int main()
             cout << "acceso denegado"<<endl;
         }
         if (confirmacion==true){
+            cout<<endl;
+            cout<<"                     Oferta de Combos                    "<<endl;
+            cout<<"---------------------------------------------------------"<<endl;
+            cout<<"||Combos                  Productos               Costo||"<<endl;
+            cout<<"_________________________________________________________"<<endl;
+            cout<<"---------------------------------------------------------"<<endl;
+            cout<<"||   1    Dos perros calientes y dos gaseosas    $35000||"<<endl;
+            cout<<"||   2           Dos gaseosas con nachos         $17900||"<<endl;
+            cout<<"||   3           hambuerguesa mas gaseosa        $16500||"<<endl;
+            cout<<"---------------------------------------------------------"<<endl;
+            cout<<endl;
             cout<<"Si desea ejecutar alguna accion como usuario ingrese 1, de lo contario ingrese otra letra"<<endl;
             cin>>a;
             while(a==1){
