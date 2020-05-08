@@ -15,6 +15,8 @@ class acceso
 public:
     string Desplegar();
     bool accesos(string UserName,string clave1);
+    bool Desplegar1(string UserName);
+    int cantidad();
 };
 
 #endif // ACCESO_H

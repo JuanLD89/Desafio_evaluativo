@@ -15,7 +15,7 @@ int main()
     cout<<"-La clave es: cajero"<<endl;
     cout<<"-Si desea cambiar el nombre de usuario, ingrese al codigo y en la plantilla acceso\nen la funcion llamada accesos, lo puede cambiar"<<endl;
     cout<<"-Ahora si desea cambiar la clave tocaria ir al archivo de texto conocido como sudo y cambiarla"<<"\n\n"<<endl;
-    string UserName,clave1;
+    string UserName,clave1,UserName1;
     int a, accion, controlador=0;
     cout << "-Si desea ingresar como administrador ingrese 1, " <<endl;
     cout << "-Si desea ingresar como usuario ingrese 2 " <<endl;
@@ -61,5 +61,19 @@ int main()
                 }
             }
         }
+    }
+
+    if (controlador==2){
+        cout<<"Ingrese la cedula: ";
+        cin>>UserName1;
+        acceso Usuario;
+        confirmacion=Usuario.Desplegar1((UserName1+ ' '));
+        if (confirmacion==true){
+            cout<< "acceso permitido"<<endl;
+        }
+        else {
+            cout << "acceso denegado"<<endl;
+        }
+        return 0;
     }
 }
