@@ -17,6 +17,24 @@ string acceso::Desplegar(){
     }
     return clave1;
 }
+
+bool acceso::agregar(string id, string producto, string cantidad, string costo)
+{
+    ofstream registro;
+    registro.open("../Desafio_evaluativo__/Productos.txt", ios::app);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    registro<<id;
+    registro<<"     ";
+    registro<<producto;
+    registro<<"     ";
+    registro<<cantidad;
+    registro<<"     ";
+    registro<<costo;
+    registro<<endl;
+
+    return true;
+}
 bool acceso::accesos(string UserName,string datos){
     bool flag=false;
     string Key;
