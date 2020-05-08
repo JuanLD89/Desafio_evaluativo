@@ -15,6 +15,7 @@ class acceso
 public:
     string Desplegar();
     bool agregar(string id,string producto,string cantidad,string costo);
+    string sinespacios();
     bool accesos(string UserName,string clave1);
     bool Desplegar1(string UserName);
     int cantidad();

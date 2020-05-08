@@ -35,6 +35,21 @@ bool acceso::agregar(string id, string producto, string cantidad, string costo)
 
     return true;
 }
+
+string acceso::sinespacios()
+{
+    char producto[100];
+    string producto1;
+
+    cout<<"Ingresa una palabra: ";
+    cin.getline(producto,100);//optienes la cadena completa del arreglo
+
+    for(int  i = 0; producto[i] != 0;++i)
+        if(producto[i] != 32)//32 significa espacio en codigo ascii!!
+            producto1+=producto[i];
+    return producto1;
+}
+
 bool acceso::accesos(string UserName,string datos){
     bool flag=false;
     string Key;

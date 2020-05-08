@@ -5,6 +5,7 @@
 #include <sstream>
 #include <stdlib.h>
 #include "acceso.h"
+#include <conio.h>
 
 using namespace std;
 
@@ -15,7 +16,8 @@ int main()
     cout<<"-La clave es: cajero"<<endl;
     cout<<"-Si desea cambiar el nombre de usuario, ingrese al codigo y en la plantilla acceso\nen la funcion llamada accesos, lo puede cambiar"<<endl;
     cout<<"-Ahora si desea cambiar la clave tocaria ir al archivo de texto conocido como sudo y cambiarla"<<"\n\n"<<endl;
-    string UserName,clave1,UserName1,id,producto,cantidad,costo;
+    char producto[100];
+    string UserName,clave1,UserName1,id,cantidad,costo,producto1;
     int a, accion, controlador=0;
     cout << "-Si desea ingresar como administrador ingrese 1, " <<endl;
     cout << "-Si desea ingresar como usuario ingrese 2 " <<endl;
@@ -50,10 +52,17 @@ int main()
                 cin >> accion;
                 if (accion==1){
                     cout<<"-Ingrese ID: "; cin >> id;
-                    cout<<"-Ingrese producto: "; cin >> producto;
+                    cin.ignore();
+
+                    cout<<"Ingresa una palabra: ";
+                    cin.getline(producto,100);//optienes la cadena completa del arreglo
+                    for(int  i = 0; producto[i] != 0;++i)
+                        if(producto[i] != 32)//32 significa espacio en codigo ascii!!
+                            producto1+=producto[i];
+
                     cout<<"-Ingrese Cantidad: "; cin >> cantidad;
                     cout<<"-Ingrese costo: "; cin >> costo;
-                    Usuario.agregar(id,producto,cantidad,costo);
+                    Usuario.agregar(id,producto1,cantidad,costo);
                 }
                 if (accion==2){
                     cout<<"-En mantenimiento ";
@@ -64,6 +73,7 @@ int main()
                 if (accion==4){
                     break;
                 }
+                //else{break;}
             }
         }
     }
