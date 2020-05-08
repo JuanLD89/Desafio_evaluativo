@@ -4,4 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        acceso.cpp \
         main.cpp
+
+HEADERS += \
+    acceso.h
