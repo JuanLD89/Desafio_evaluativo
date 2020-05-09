@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "acceso.h"
 #include <conio.h>
+#include "comboss.h"
 
 using namespace std;
 
@@ -13,11 +14,11 @@ int main()
 {
     bool confirmacion;
     char producto[100];
-    string UserName,clave1,UserName1,id,cantidad,costo,producto1,actualizar,idplus,informacion,idcombo;
+    string UserName,clave1,UserName1,id,cantidad,costo,producto1,actualizar,idplus,informacion,idcombo,nombrecombo,combo,valor_combo;
     int a, accion,adminprimeropcion,aentero,plusproductoexistente,temporal;
     cout<<"Ingrese codigo de la boleta: ";
     cin>>UserName;
-    //if (UserName=="Administrador"){
+    comboss Crearcomboss;
     acceso Usuario;
     clave1=Usuario.Desplegar();
     confirmacion=Usuario.accesos(UserName,clave1);
@@ -97,6 +98,14 @@ int main()
                     temporal=stoi(idcombo);
                     temporal+=1;
                     idcombo=to_string(temporal);
+                    cout<<"Que nombre desea ponerle al combo?: ";  cin>>nombrecombo;
+                    informacion=Usuario.inventario();
+                    cout << informacion;
+                    cout <<endl;
+                    cout <<"Escriba el ID de los productos que requiere el combo y la cantidad de estos separados por coma"
+                           "Separa con punto y coma los diferentes productos";      cin>>combo;
+                    cout <<"Esriba el valor que desea ponerle al combo";        cin >>valor_combo;
+                    Crearcomboss.agregarcombos(idcombo,nombrecombo,valor_combo);
 
                 }
                 if (accion==4){

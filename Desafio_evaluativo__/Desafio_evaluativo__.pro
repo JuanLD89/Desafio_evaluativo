@@ -5,7 +5,9 @@ CONFIG -= qt
 
 SOURCES += \
         acceso.cpp \
+        comboss.cpp \
         main.cpp
 
 HEADERS += \
-    acceso.h
+    acceso.h \
+    comboss.h
