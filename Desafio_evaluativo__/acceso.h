@@ -24,6 +24,7 @@ public:
     int productexistente(int aentero,int plusproductoexistente, string idplus);
     string inventario();
     string generarid();
+    string generaridcombo();
 
 };
 

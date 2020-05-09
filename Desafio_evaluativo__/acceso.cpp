@@ -260,6 +260,41 @@ string acceso::generarid()
     return datos;
 }
 
+string acceso::generaridcombo()
+{
+    string datos;
+    string arreglo[cantidad1()][4];
+    int contador1=0,contador2=0,cantidad2=cantidad1();
+    ifstream registro;
+    registro.open("../Desafio_evaluativo__/Combos.txt", ios::in);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    while (registro.good()){
+        char tem=registro.get();
+        if (registro.good()){
+            if (tem!=' ' || tem!='\n'){
+                if (tem==' '){}
+                if (tem=='\n'){}
+                else{
+                    datos+=tem;
+                }
+                }
+            if (tem==' ' || tem=='\n'){
+                arreglo[contador2][contador1]=datos;
+                contador1=contador1+1;
+                if (tem=='\n'){
+                    contador2=contador2+1;
+                    contador1=0;
+                    }
+                datos="";
+                }
+
+            }
+    }
+    datos=arreglo[cantidad2-2][0];
+    return datos;
+}
+
 
 bool acceso::Desplegar1(string UserName){
     bool flag=false;

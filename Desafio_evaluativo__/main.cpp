@@ -13,7 +13,7 @@ int main()
 {
     bool confirmacion;
     char producto[100];
-    string UserName,clave1,UserName1,id,cantidad,costo,producto1,actualizar,idplus,informacion;
+    string UserName,clave1,UserName1,id,cantidad,costo,producto1,actualizar,idplus,informacion,idcombo;
     int a, accion,adminprimeropcion,aentero,plusproductoexistente,temporal;
     cout<<"Ingrese codigo de la boleta: ";
     cin>>UserName;
@@ -63,6 +63,9 @@ int main()
                     }
                     if (adminprimeropcion == 2){
                         id=Usuario.generarid();
+                        if (idcombo==""){
+                            idcombo="0";
+                        }
                         temporal=stoi(id);
                         temporal+=1;
                         id=to_string(temporal);
@@ -87,7 +90,13 @@ int main()
 
                 }
                 if (accion==3){
-                    cout<<"-En mantenimiento ";
+                    idcombo=Usuario.generaridcombo();
+                    if (idcombo==""){
+                        idcombo="0";
+                    }
+                    temporal=stoi(idcombo);
+                    temporal+=1;
+                    idcombo=to_string(temporal);
                 }
                 if (accion==4){
                     cout<<"-En mantenimiento ";
