@@ -16,9 +16,14 @@ public:
     string Desplegar();
     bool agregar(string id,string producto,string cantidad,string costo);
     string sinespacios();
+    string Cproductos(string idplus);
     bool accesos(string UserName,string clave1);
     bool Desplegar1(string UserName);
     int cantidad();
+    int cantidad1();
+    int productexistente(int aentero,int plusproductoexistente, string idplus);
+    string inventario();
+
 };
 
 #endif // ACCESO_H

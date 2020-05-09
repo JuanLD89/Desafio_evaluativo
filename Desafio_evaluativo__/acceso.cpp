@@ -25,11 +25,11 @@ bool acceso::agregar(string id, string producto, string cantidad, string costo)
     if (registro.fail())
         cerr << "Error" << endl;
     registro<<id;
-    registro<<"     ";
+    registro<<" ";
     registro<<producto;
-    registro<<"     ";
+    registro<<" ";
     registro<<cantidad;
-    registro<<"     ";
+    registro<<" ";
     registro<<costo;
     registro<<endl;
 
@@ -50,6 +50,43 @@ string acceso::sinespacios()
     return producto1;
 }
 
+string acceso::Cproductos(string idplus)
+{
+    string datos,user,saldo2;
+    string arreglo[cantidad1()][4];
+    int contador1=0,contador2=0,contador3=0;
+    ifstream registro;
+    registro.open("../Desafio_evaluativo__/Productos.txt", ios::in);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    while (registro.good()){
+        char tem=registro.get();
+    if (registro.good()){
+        if (tem!=' ' || tem!='\n'){
+            datos+=tem;
+            }
+        if (tem==' ' || tem=='\n'){
+            arreglo[contador2][contador1]=datos;
+            contador1=contador1+1;
+            if (tem=='\n'){
+                contador2=contador2+1;
+                contador1=0;
+            }
+            datos="";
+            }
+
+        }
+    }
+    for (int t=0;t<(cantidad1()-1);t++){
+        user=arreglo[contador3][0];
+        saldo2=arreglo[contador3][2];
+        if (idplus==user){
+            return saldo2;
+        }
+            contador3+=1;
+    }
+}
+
 bool acceso::accesos(string UserName,string datos){
     bool flag=false;
     string Key;
@@ -57,7 +94,7 @@ bool acceso::accesos(string UserName,string datos){
     registro.open("../Desafio_evaluativo__/clave_admin.txt", ios::in);
     if (registro.fail())
         cerr << "Error" << endl;
-    if (UserName=="administrador"){      //Si desea cambiar el usuario del administrador, cambie el nombre de esta linea conocida como "administrador"
+    if (UserName=="Administrador"){      //Si desea cambiar el usuario del administrador, cambie el nombre de esta linea conocida como "administrador"
         flag=true;                      //Ahora si desea cambiar la clave tocaria ir al archivo de texto conocido como sudo y cambiarla
     }
     else {
@@ -92,6 +129,102 @@ int acceso::cantidad()
     return cantidadparaarreglo;
 }
 
+int acceso::cantidad1()
+{
+    int cantidadparaarreglo=1;
+    ifstream registro;
+    registro.open("../Desafio_evaluativo__/Productos.txt", ios::in);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    while (registro.good()){
+        char tem=registro.get();
+    if (registro.good()){
+        if (tem=='\n'){
+            cantidadparaarreglo+=1;
+            }
+        }
+    }
+    return cantidadparaarreglo;
+}
+
+int acceso::productexistente(int aentero, int plusproductoexistente, string idplus)
+{
+    string datos,user,saldo2,arr;
+    string arreglo[cantidad1()][4];
+    int contador1=0,contador2=0,contador3=0,restante,cantidad2=cantidad1();
+    ifstream registro;
+    registro.open("../Desafio_evaluativo__/Productos.txt", ios::in);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    while (registro.good()){
+        char tem=registro.get();
+        if (registro.good()){
+            if (tem!=' ' || tem!='\n'){
+                if (tem==' '){}
+                if (tem=='\n'){}
+                else{
+                    datos+=tem;
+                }
+                }
+            if (tem==' ' || tem=='\n'){
+                arreglo[contador2][contador1]=datos;
+                contador1=contador1+1;
+                if (tem=='\n'){
+                    contador2=contador2+1;
+                    contador1=0;
+                    }
+                datos="";
+                }
+
+            }
+    }
+    arreglo[contador2][contador1]=datos;
+    for (int t=0;t<(cantidad1()-1);t++){
+        user=arreglo[contador3][0];
+        saldo2=arreglo[contador3][2];
+        if (idplus==user){
+            restante=aentero+plusproductoexistente;
+            std::string numeroComoCadena = std::to_string(restante);
+            arreglo[contador3][2]=numeroComoCadena+' ';
+            ofstream registro;
+            registro.open("../Desafio_evaluativo__/Productos.txt", ios::out);
+            if (registro.fail())
+                cerr << "Error" << endl;
+            for(int j=0;j<cantidad2;j++){
+                for(int r=0;r<4;r++){
+                    arr=arreglo[j][r];
+                    registro<<arr;
+                    if (r==3 && j!=cantidad1()+2){
+                        registro<<'\n';
+                    }
+                }
+             }
+             registro.close();
+             return restante;
+        }
+        contador3+=1;
+    }
+
+}
+
+string acceso::inventario()
+{
+    string info;
+    ifstream registro;
+    registro.open("../Desafio_evaluativo__/Productos.txt", ios::in);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    while (registro.good()){
+        char tem=registro.get();
+        if (registro.good()){
+            info+=tem;
+        }
+
+    }
+    return info;
+}
+
+
 bool acceso::Desplegar1(string UserName){
     bool flag=false;
     string datos;
@@ -124,22 +257,14 @@ bool acceso::Desplegar1(string UserName){
         user=arreglo[contador3][0];
         if (UserName==user){
             flag=true;
-            break;
         }
         contador3=contador3+1;
     }
-    compararclave=arreglo[contador3][1];
-        if (flag==true){
-            cout<<"ingrese clave: ";
-            cin>>key;
-            if((key+' ')==compararclave){
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        else{
-            return false;
-        }
+    if (flag==true){
+        return true;
+    }
+
+    else {
+        return false;
+    }
 }
