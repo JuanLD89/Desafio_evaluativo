@@ -97,6 +97,7 @@ int main()
                     temporal=stoi(idcombo);
                     temporal+=1;
                     idcombo=to_string(temporal);
+
                 }
                 if (accion==4){
                     cout<<"-En mantenimiento ";
