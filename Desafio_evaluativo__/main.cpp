@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdio.h>
 #include <sstream>
 #include <stdlib.h>
 #include "acceso.h"
@@ -13,7 +14,7 @@ int main()
     bool confirmacion;
     char producto[100];
     string UserName,clave1,UserName1,id,cantidad,costo,producto1,actualizar,idplus,informacion;
-    int a, accion,adminprimeropcion,aentero,plusproductoexistente;
+    int a, accion,adminprimeropcion,aentero,plusproductoexistente,temporal;
     cout<<"Ingrese codigo de la boleta: ";
     cin>>UserName;
     //if (UserName=="Administrador"){
@@ -61,7 +62,10 @@ int main()
                         Usuario.productexistente(aentero,plusproductoexistente,(idplus+ ' '));
                     }
                     if (adminprimeropcion == 2){
-                        cout<<"-Ingrese ID: "; cin >> id;
+                        id=Usuario.generarid();
+                        temporal=stoi(id);
+                        temporal+=1;
+                        id=to_string(temporal);
                         cin.ignore();
 
                         cout<<"Ingrese producto: ";
@@ -77,8 +81,10 @@ int main()
                 }
                 if (accion==2){
                     informacion=Usuario.inventario();
+                    //printf("%30s",informacion);
+                    cout << informacion;
                     cout<<endl;
-                    cout<<informacion<<endl;
+
                 }
                 if (accion==3){
                     cout<<"-En mantenimiento ";

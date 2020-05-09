@@ -194,7 +194,7 @@ int acceso::productexistente(int aentero, int plusproductoexistente, string idpl
                 for(int r=0;r<4;r++){
                     arr=arreglo[j][r];
                     registro<<arr;
-                    if (r==3 && j!=cantidad1()+2){
+                    if (r==3 && j<=cantidad2-2){
                         registro<<'\n';
                     }
                 }
@@ -218,10 +218,46 @@ string acceso::inventario()
         char tem=registro.get();
         if (registro.good()){
             info+=tem;
+            //printf("%2c",tem);
         }
 
     }
     return info;
+}
+
+string acceso::generarid()
+{
+    string datos;
+    string arreglo[cantidad1()][4];
+    int contador1=0,contador2=0,contador3=0,restante,cantidad2=cantidad1();
+    ifstream registro;
+    registro.open("../Desafio_evaluativo__/Productos.txt", ios::in);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    while (registro.good()){
+        char tem=registro.get();
+        if (registro.good()){
+            if (tem!=' ' || tem!='\n'){
+                if (tem==' '){}
+                if (tem=='\n'){}
+                else{
+                    datos+=tem;
+                }
+                }
+            if (tem==' ' || tem=='\n'){
+                arreglo[contador2][contador1]=datos;
+                contador1=contador1+1;
+                if (tem=='\n'){
+                    contador2=contador2+1;
+                    contador1=0;
+                    }
+                datos="";
+                }
+
+            }
+    }
+    datos=arreglo[cantidad2-2][0];
+    return datos;
 }
 
 
