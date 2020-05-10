@@ -97,7 +97,7 @@ string comboss::productosdesencriptados()
     int contadorespecial=0;
     int final_=func.cantidad1()-2;
     string compara1,compara2;
-    for (int h=0;h<final_;h++){
+    while(contadorespecial<puntoycoma()){
         compara1=arreglo[c1][c2];
         compara2=arreg[c3][0];
         compara1+=' ';
@@ -131,10 +131,7 @@ string comboss::productosdesencriptados()
     c3=0;
     contadorespecial=0;
     if (flag==true){
-        for (int h=0;h<=final_;h++){
-            if(contadorespecial==puntoycoma()-1){
-                return "Combo creado....";
-            }
+        while(contadorespecial<puntoycoma()){
             compara1=arreglo[c1][c2];
             compara2=arreg[c3][0];
             compara1+=' ';
@@ -162,8 +159,14 @@ string comboss::productosdesencriptados()
                             if (r==3 && j<=cantidad2-2){
                                 regi<<'\n';
                             }
+                            if(contadorespecial==puntoycoma() && r==3 && j==cantidad2-1){
+                                regi<<'\n';
+                            }
+
+
                         }
                     }
+
                     regi.close();
                 }
              }
