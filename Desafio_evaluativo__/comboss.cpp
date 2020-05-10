@@ -113,6 +113,8 @@ string comboss::productosdesencriptados()
                 c1+=1;
                 c2=0;
                 c3=0;
+
+                contadorespecial+=1;
             }
             else{
                 return "No tiene la cantidad de productos suficientes para este combo";
@@ -123,25 +125,32 @@ string comboss::productosdesencriptados()
              flag=false;
          }
         c3+=1;
-        contadorespecial+=1;
     }
     c1=0;
     c2=0;
     c3=0;
-
+    contadorespecial=0;
     if (flag==true){
         for (int h=0;h<=final_;h++){
+            if(contadorespecial==puntoycoma()-1){
+                return "Combo creado....";
+            }
             compara1=arreglo[c1][c2];
             compara2=arreg[c3][0];
             compara1+=' ';
+
             if (compara1==compara2){
                 c2+=1;
                 temporal_=stoi(arreg[c3][2]);
                 temporal_2=stoi(arreglo[c1][c2]);
                 if (temporal_>=temporal_2){
+                    c1+=1;
+                    c2=0;
+                    contadorespecial+=1;
                     restantess=temporal_-temporal_2;
                     string numeroComoCadena = to_string(restantess);
                     arreg[c3][2]=numeroComoCadena+ ' ';
+                    c3=0;
                     ofstream regi;
                     regi.open("../Desafio_evaluativo__/Productos.txt", ios::out);
                     if (regi.fail())
@@ -156,14 +165,13 @@ string comboss::productosdesencriptados()
                         }
                     }
                     regi.close();
-                    c2=0;
                 }
              }
             c3+=1;
         }
     }
     else{
-        return "ID no existente.....";
+        return "Una de las ID no existe.....";
     }
     return "Combo creado....";
 
