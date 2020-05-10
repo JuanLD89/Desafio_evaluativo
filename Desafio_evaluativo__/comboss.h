@@ -19,6 +19,7 @@ public:
     int saltosdelinea();
     int puntoycoma();
     bool existencia();
+    string menucombos();
 
 };
 

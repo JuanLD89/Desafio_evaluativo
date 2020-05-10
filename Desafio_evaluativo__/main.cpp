@@ -110,8 +110,7 @@ int main()
 
                 bool resu;
                 if (accion==4){
-                    resu=Crearcomboss.existencia();
-                    cout<<resu<<endl;
+                    cout<<"En mantenimiento.........."<<endl;
                 }
                 if (accion==5){
                     break;
@@ -122,6 +121,8 @@ int main()
     }
 
     else{
+        comboss Combi;
+        string menu;
         acceso Usuario;
         confirmacion=Usuario.Desplegar1((UserName+ ' '));
         if (confirmacion==true){
@@ -135,11 +136,8 @@ int main()
             cout<<"_________________________________________________________"<<endl;
             cout<<"||                    Oferta de Combos                 ||"<<endl;
             cout<<"---------------------------------------------------------"<<endl;
-            cout<<"||Combos                  Productos               Costo||"<<endl;
-            cout<<"========================================================="<<endl;
-            cout<<"||   1    Dos perros calientes y dos gaseosas    $35000||"<<endl;
-            cout<<"||   2           Dos gaseosas con nachos         $17900||"<<endl;
-            cout<<"||   3           hambuerguesa mas gaseosa        $16500||"<<endl;
+            menu=Combi.menucombos();
+            cout << menu;
             cout<<"---------------------------------------------------------"<<endl;
             cout<<endl;
             cout<<"Si desea ejecutar alguna accion como usuario ingrese 1, de lo contario ingrese otra letra"<<endl;
