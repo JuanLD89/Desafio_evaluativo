@@ -326,13 +326,21 @@ string comboss::menucombos()
     registro.open("../Desafio_evaluativo__/Combos.txt", ios::in);
     if (registro.fail())
         cerr << "Error" << endl;
+    printf("%2c",' ');
+    printf("%c",' ');
     while (registro.good()){
         char tem=registro.get();
         if (registro.good()){
             info+=tem;
-            //printf("%2c",tem);
+            printf("%c",tem);
+        }
+        if (tem=='\n'){
+
+            cout<<" ||=======================================================||"<<endl;
+            printf("%2c",' ');
+            printf("%c",' ');
         }
 
     }
-    return info;
+    //return info;
 }

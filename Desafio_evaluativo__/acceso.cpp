@@ -232,11 +232,19 @@ string acceso::inventario()
     registro.open("../Desafio_evaluativo__/Productos.txt", ios::in);
     if (registro.fail())
         cerr << "Error" << endl;
+    printf("%2c",' ');
+    printf("%c",' ');
     while (registro.good()){
         char tem=registro.get();
         if (registro.good()){
             info+=tem;
-            //printf("%2c",tem);
+            printf("%c",tem);
+            if (tem=='\n'){
+
+                cout<<" ||=======================================================||"<<endl;
+                printf("%2c",' ');
+                printf("%c",' ');
+            }
         }
 
     }

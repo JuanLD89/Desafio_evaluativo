@@ -84,11 +84,11 @@ int main()
                     }
                 }
                 if (accion==2){
-                    informacion=Usuario.inventario();
-                    //printf("%30s",informacion);
-                    cout << informacion;
                     cout<<endl;
-
+                    cout<<" ||=======================================================||"<<endl;
+                    cout<<" ||               Inventario de productos                 ||"<<endl;
+                    cout<<" ||=======================================================||"<<endl;
+                    Usuario.inventario();
                 }
                 if (accion==3){
                     idcombo=Usuario.generaridcombo();
@@ -108,7 +108,6 @@ int main()
 
                 }
 
-                bool resu;
                 if (accion==4){
                     cout<<"En mantenimiento.........."<<endl;
                 }
@@ -133,12 +132,12 @@ int main()
         }
         if (confirmacion==true){
             cout<<endl;
-            cout<<"_________________________________________________________"<<endl;
-            cout<<"||                    Oferta de Combos                 ||"<<endl;
-            cout<<"---------------------------------------------------------"<<endl;
-            menu=Combi.menucombos();
-            cout << menu;
-            cout<<"---------------------------------------------------------"<<endl;
+            cout<<" ||=======================================================||"<<endl;
+            cout<<" ||                    Oferta de Combos                   ||"<<endl;
+            cout<<" ||=======================================================||"<<endl;
+
+            Combi.menucombos();
+            //cout << menu;
             cout<<endl;
             cout<<"Si desea ejecutar alguna accion como usuario ingrese 1, de lo contario ingrese otra letra"<<endl;
             cin>>a;
