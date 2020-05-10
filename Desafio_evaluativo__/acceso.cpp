@@ -309,7 +309,13 @@ string acceso::generaridcombo()
 
             }
     }
+    if (cantidad3==1){
+        cantidad3=2;
+    }
     datos=arreglo[cantidad3-2][0];
+    if (datos==""){
+        datos="0";
+    }
     return datos;
 }
 

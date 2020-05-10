@@ -92,9 +92,6 @@ int main()
                 }
                 if (accion==3){
                     idcombo=Usuario.generaridcombo();
-                    if (idcombo==""){
-                        idcombo="0";
-                    }
                     temporal=stoi(idcombo);
                     temporal+=1;
                     idcombo=to_string(temporal);
