@@ -105,14 +105,16 @@ int main()
                     cout <<"Escriba el ID de los productos que requiere el combo y la cantidad de estos separados por coma"<<endl;
                     cout <<"Separa con punto y coma los diferentes productos: ";      cin>>combo;
                     cout <<"Esriba el valor que desea ponerle al combo: ";        cin >>valor_combo;
-                    Crearcomboss.agregarcombos(idcombo,nombrecombo,valor_combo);
                     Crearcomboss.codigocombos(combo);
-                    resultadocombo=Crearcomboss.productosdesencriptados();
+                    resultadocombo=Crearcomboss.productosdesencriptados(idcombo,nombrecombo,valor_combo);
                     cout<<resultadocombo<<endl;
 
                 }
+
+                bool resu;
                 if (accion==4){
-                    cout<<"En mantenimiento......";
+                    resu=Crearcomboss.existencia();
+                    cout<<resu<<endl;
                 }
                 if (accion==5){
                     break;

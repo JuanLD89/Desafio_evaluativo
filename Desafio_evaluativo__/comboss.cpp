@@ -30,8 +30,13 @@ bool comboss::codigocombos(string combo__)
     return true;
 }
 
-string comboss::productosdesencriptados()
+string comboss::productosdesencriptados(string idcombo,string nombrecombo,string valor_combo)
 {
+    bool decisiva;
+    decisiva=existencia();
+    if (decisiva==false){
+        return "Una de las ID no existe.....";
+    }
     acceso func;
     string dat,arr;
     string arreglo[puntoycoma()][2];
@@ -91,11 +96,11 @@ string comboss::productosdesencriptados()
 
             }
     }
+
     bool flag=false;
     int c1=0,c2=0,restantess;
     int c3=0;
     int contadorespecial=0;
-    int final_=func.cantidad1()-2;
     string compara1,compara2;
     while(contadorespecial<puntoycoma()){
         compara1=arreglo[c1][c2];
@@ -176,6 +181,7 @@ string comboss::productosdesencriptados()
     else{
         return "Una de las ID no existe.....";
     }
+    agregarcombos(idcombo,nombrecombo,valor_combo);
     return "Combo creado....";
 
 }
@@ -219,3 +225,96 @@ int comboss::puntoycoma()
     return cantidadparaarreglo;
 }
 
+bool comboss::existencia()
+{
+    string dat,arr;
+    string arreg[puntoycoma()][2];
+    int cont1=0,cont2=0;
+    ifstream regis;
+    regis.open("../Desafio_evaluativo__/Codigocombos.txt", ios::in);
+    if (regis.fail())
+        cerr << "Error" << endl;
+    while (regis.good()){
+        char tem=regis.get();
+        if (regis.good()){
+            if (tem==',' || tem=='\n'){
+                arreg[cont1][cont2]=dat;
+                dat="";
+                cont2+=1;
+            }
+            if (tem==';'){
+                arreg[cont1][cont2]=dat;
+                cont1+=1;
+                cont2=0;
+
+                dat="";
+            }
+            if (tem==',' || tem == ';' || tem =='\n'){
+            }
+            else{
+                dat+=tem;
+            }
+        }
+    }
+    acceso funciones_;
+    string datos;
+    string arreglo[funciones_.cantidad1()][4];
+    int contador1=0,contador2=0;
+    ifstream registro;
+    registro.open("../Desafio_evaluativo__/Productos.txt", ios::in);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    while (registro.good()){
+        char tem=registro.get();
+        if (registro.good()){
+            if (tem!=' ' || tem!='\n'){
+                if (tem==' '){}
+                if (tem=='\n'){}
+                else{
+                    datos+=tem;
+                }
+                }
+            if (tem==' ' || tem=='\n'){
+                arreglo[contador2][contador1]=datos;
+                contador1=contador1+1;
+                if (tem=='\n'){
+                    contador2=contador2+1;
+                    contador1=0;
+                    }
+                datos="";
+                }
+
+            }
+    }
+    contador1=0;
+    contador2=0;
+    string pruebaspru,pruebaspru1;
+    int contador3=0,f;
+    f=puntoycoma();
+    bool flag=false;
+    while (contador3<puntoycoma()){
+        pruebaspru=arreg[contador3][0];
+        pruebaspru+=' ';
+        for(int i=0;i<funciones_.cantidad1();i++){
+            pruebaspru1=arreglo[i][0];
+            if(flag==true){
+                i=0;
+                if(contador3<f-1){
+                    flag=false;
+                }
+
+                break;
+            }
+            if(pruebaspru==pruebaspru1){
+                flag=true;
+            }
+            else{
+                flag=false;
+            }
+
+        }
+        contador3+=1;
+
+    }
+    return flag;
+}
