@@ -21,6 +21,7 @@ public:
     bool Desplegar1(string UserName);
     int cantidad();
     int cantidad1();
+    int cantidad2();
     int productexistente(int aentero,int plusproductoexistente, string idplus);
     string inventario();
     string generarid();

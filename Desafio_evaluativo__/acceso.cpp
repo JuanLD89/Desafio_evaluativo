@@ -54,7 +54,7 @@ string acceso::Cproductos(string idplus)
 {
     string datos,user,saldo2;
     string arreglo[cantidad1()][4];
-    int contador1=0,contador2=0,contador3=0;
+    int cont1=0,cont2=0,cont3=0;
     ifstream registro;
     registro.open("../Desafio_evaluativo__/Productos.txt", ios::in);
     if (registro.fail())
@@ -66,11 +66,11 @@ string acceso::Cproductos(string idplus)
             datos+=tem;
             }
         if (tem==' ' || tem=='\n'){
-            arreglo[contador2][contador1]=datos;
-            contador1=contador1+1;
+            arreglo[cont2][cont1]=datos;
+            cont1=cont1+1;
             if (tem=='\n'){
-                contador2=contador2+1;
-                contador1=0;
+                cont2=cont2+1;
+                cont1=0;
             }
             datos="";
             }
@@ -78,12 +78,12 @@ string acceso::Cproductos(string idplus)
         }
     }
     for (int t=0;t<(cantidad1()-1);t++){
-        user=arreglo[contador3][0];
-        saldo2=arreglo[contador3][2];
+        user=arreglo[cont3][0];
+        saldo2=arreglo[cont3][2];
         if (idplus==user){
             return saldo2;
         }
-            contador3+=1;
+            cont3+=1;
     }
 }
 
@@ -134,6 +134,24 @@ int acceso::cantidad1()
     int cantidadparaarreglo=1;
     ifstream registro;
     registro.open("../Desafio_evaluativo__/Productos.txt", ios::in);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    while (registro.good()){
+        char tem=registro.get();
+    if (registro.good()){
+        if (tem=='\n'){
+            cantidadparaarreglo+=1;
+            }
+        }
+    }
+    return cantidadparaarreglo;
+}
+
+int acceso::cantidad2()
+{
+    int cantidadparaarreglo=1;
+    ifstream registro;
+    registro.open("../Desafio_evaluativo__/Combos.txt", ios::in);
     if (registro.fail())
         cerr << "Error" << endl;
     while (registro.good()){
@@ -263,8 +281,8 @@ string acceso::generarid()
 string acceso::generaridcombo()
 {
     string datos;
-    string arreglo[cantidad1()][4];
-    int contador1=0,contador2=0,cantidad2=cantidad1();
+    string arreglo[cantidad2()][4];
+    int contador1=0,contador2=0,cantidad3=cantidad2();
     ifstream registro;
     registro.open("../Desafio_evaluativo__/Combos.txt", ios::in);
     if (registro.fail())
@@ -291,7 +309,7 @@ string acceso::generaridcombo()
 
             }
     }
-    datos=arreglo[cantidad2-2][0];
+    datos=arreglo[cantidad3-2][0];
     return datos;
 }
 

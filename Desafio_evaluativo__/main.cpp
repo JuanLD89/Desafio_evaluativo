@@ -14,7 +14,7 @@ int main()
 {
     bool confirmacion;
     char producto[100];
-    string UserName,clave1,UserName1,id,cantidad,costo,producto1,actualizar,idplus,informacion,idcombo,nombrecombo,combo,valor_combo;
+    string UserName,clave1,UserName1,id,cantidad,costo,producto1,actualizar,resultadocombo,idplus,informacion,idcombo,nombrecombo,combo,valor_combo;
     int a, accion,adminprimeropcion,aentero,plusproductoexistente,temporal;
     cout<<"Ingrese codigo de la boleta: ";
     cin>>UserName;
@@ -102,14 +102,17 @@ int main()
                     informacion=Usuario.inventario();
                     cout << informacion;
                     cout <<endl;
-                    cout <<"Escriba el ID de los productos que requiere el combo y la cantidad de estos separados por coma"
-                           "Separa con punto y coma los diferentes productos";      cin>>combo;
-                    cout <<"Esriba el valor que desea ponerle al combo";        cin >>valor_combo;
+                    cout <<"Escriba el ID de los productos que requiere el combo y la cantidad de estos separados por coma"<<endl;
+                    cout <<"Separa con punto y coma los diferentes productos: ";      cin>>combo;
+                    cout <<"Esriba el valor que desea ponerle al combo: ";        cin >>valor_combo;
                     Crearcomboss.agregarcombos(idcombo,nombrecombo,valor_combo);
+                    Crearcomboss.codigocombos(combo);
+                    resultadocombo=Crearcomboss.productosdesencriptados();
+                    cout<<resultadocombo<<endl;
 
                 }
                 if (accion==4){
-                    cout<<"-En mantenimiento ";
+                    cout<<"En mantenimiento......";
                 }
                 if (accion==5){
                     break;
