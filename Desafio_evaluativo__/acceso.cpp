@@ -360,14 +360,22 @@ bool acceso::Desplegar1(string UserName){
         user=arreglo[contador3][0];
         if (UserName==user){
             flag=true;
+            break;
         }
         contador3=contador3+1;
     }
-    if (flag==true){
-        return true;
-    }
-
-    else {
-        return false;
-    }
+    compararclave=arreglo[contador3][1];
+        if (flag==true){
+            cout<<"ingrese clave: ";
+            cin>>key;
+            if((key+' ')==compararclave){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
 }

@@ -22,6 +22,7 @@ public:
     string menucombos();
     string comboseleccionado(string idparacombo);
     void sordenusuario(int valor);
+    string pagocomborealizado();
 
 };
 
