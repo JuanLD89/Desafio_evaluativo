@@ -386,3 +386,15 @@ string comboss::comboseleccionado(string idparacombo)
     }
     return "la ID ingresada no existe entre los combos.........";
 }
+
+void comboss::sordenusuario(int valor)
+{
+    int monedas[10]={50000,20000,10000,5000,2000,1000,500,200,100,50};
+    for(int i=0;i<10;i++){
+        int cantidad=valor/(*(monedas+i));
+        if (cantidad != 0){
+            cout<<*(monedas+i)<<": "<<cantidad<<endl;
+        }
+        valor%=*(monedas+i);
+    }
+}

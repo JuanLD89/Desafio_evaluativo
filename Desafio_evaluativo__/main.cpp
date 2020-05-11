@@ -154,9 +154,12 @@ int main()
                 cout<<endl;
                 cin >> accion;
                 if (accion==1){
+                    int valor;
                    cout<<"-Elija el combo que desea ordenar ecribiendo el ID de este: ";  cin>>idparacombo;
                    segdaopcion=Crearcomboss.comboseleccionado(idparacombo);
                    cout<<segdaopcion<<endl;
+                   valor=stoi(segdaopcion);
+                   Crearcomboss.sordenusuario(valor);
                 }
                 if (accion==2){
                     break;
