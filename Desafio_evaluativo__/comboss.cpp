@@ -344,3 +344,45 @@ string comboss::menucombos()
     }
     //return info;
 }
+
+string comboss::comboseleccionado(string idparacombo)
+{
+    acceso funcionesss;
+    string datos="";
+    string arreg[funcionesss.cantidad2()-1][3];
+    int contador1=0,contador2=0;
+    ifstream regis;
+    regis.open("../Desafio_evaluativo__/Combos.txt", ios::in);
+    if (regis.fail())
+        cerr << "Error" << endl;
+    while (regis.good()){
+        char tem=regis.get();
+        if (regis.good()){
+            if (tem!=' ' || tem!='\n'){
+                if (tem==' '){}
+                if (tem=='\n'){}
+                else{
+                    datos+=tem;
+                }
+                }
+            if (tem==' ' || tem=='\n'){
+                arreg[contador2][contador1]=datos;
+                contador1=contador1+1;
+                if (tem=='\n'){
+                    contador2=contador2+1;
+                    contador1=0;
+                    }
+                datos="";
+                }
+
+            }
+    }
+    int limite=funcionesss.cantidad2()-1;
+    idparacombo+=' ';
+    for(int i=0;i<limite;i++){
+        if(idparacombo==arreg[i][0]){
+            return arreg[i][2];
+        }
+    }
+    return "la ID ingresada no existe entre los combos.........";
+}

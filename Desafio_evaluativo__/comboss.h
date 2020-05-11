@@ -20,6 +20,7 @@ public:
     int puntoycoma();
     bool existencia();
     string menucombos();
+    string comboseleccionado(string idparacombo);
 
 };
 

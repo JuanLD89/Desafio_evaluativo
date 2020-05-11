@@ -72,7 +72,7 @@ int main()
                         id=to_string(temporal);
                         cin.ignore();
 
-                        cout<<"Ingrese producto: ";
+                        cout<<"-Ingrese producto: ";
                         cin.getline(producto,100);//optienes la cadena completa del arreglo
                         for(int  i = 0; producto[i] != 0;++i)
                             if(producto[i] != 32)//32 significa espacio en codigo ascii!!
@@ -121,7 +121,8 @@ int main()
 
     else{
         comboss Combi;
-        string menu;
+        string menu, idparacombo;
+        string segdaopcion;
         acceso Usuario;
         confirmacion=Usuario.Desplegar1((UserName+ ' '));
         if (confirmacion==true){
@@ -135,7 +136,8 @@ int main()
             cout<<" ||=======================================================||"<<endl;
             cout<<" ||                    Oferta de Combos                   ||"<<endl;
             cout<<" ||=======================================================||"<<endl;
-
+            cout<<" ||    ID                 Combo                 Precio    ||"<<endl;
+            cout<<" ||=======================================================||"<<endl;
             Combi.menucombos();
             //cout << menu;
             cout<<endl;
@@ -152,7 +154,9 @@ int main()
                 cout<<endl;
                 cin >> accion;
                 if (accion==1){
-                   cout<<"-En mantenimiento"<<endl;
+                   cout<<"-Elija el combo que desea ordenar ecribiendo el ID de este: ";  cin>>idparacombo;
+                   segdaopcion=Crearcomboss.comboseleccionado(idparacombo);
+                   cout<<segdaopcion<<endl;
                 }
                 if (accion==2){
                     break;
