@@ -397,7 +397,6 @@ void comboss::sordenusuario(int valor)
         }
         valor%=*(monedas+i);
     }
-    cout<<"Resto: "<<valor<<endl;
 }
 
 string comboss::pagocomborealizado()

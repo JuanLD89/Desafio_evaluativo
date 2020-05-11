@@ -138,7 +138,7 @@ int main()
                 string menu, idparacombo;
                 string segdaopcion,sala,asiento;
                 acceso Usuario;
-                int b=1;
+                int b=1,cant;
                 while (b==1){
                 cout<<"Ingrese Usuario: ";
                 cin>>UserName;
@@ -181,14 +181,18 @@ int main()
                                 cout<<segdaopcion<<endl;
                                 valor=stoi(segdaopcion);
                                 Crearcomboss.sordenusuario(valor);
-                                cout<<"Ingrese con que o con que moneda billete o moneda va a pagar: ";  cin>>pago;
+                                cout<<"Ingrese billete o moneda para el pago: ";  cin>>pago;
+                                cout<<"Ingrese cantidad de este: "; cin>>cant;
+                                pago=pago*cant;
                                 devuelta=valor-pago;
                                 if (devuelta>0){
                                     cout<<"Para completar el pago hace falta: "<<devuelta<<endl;
                                 }
                                 while (devuelta>0){
                                     Crearcomboss.sordenusuario(pago);
-                                    cout<<"Ingrese con que o con que moneda billete o moneda va a pagar: ";  cin>>pago;
+                                    cout<<"Ingrese billete o moneda para el pago: ";  cin>>pago;
+                                    cout<<"Ingrese cantidad de este: "; cin>>cant;
+                                    pago=pago*cant;
                                     devuelta=devuelta-pago;
                                     if (devuelta<0){
                                         break;

@@ -331,7 +331,7 @@ string acceso::generaridcombo()
 bool acceso::Desplegar1(string UserName){
     bool flag=false;
     string datos;
-    string arreglo[1][3];
+    string arreglo[cantidad()][3];
     int contador1=0,contador2=0,contador3=0;
     ifstream registro;
     registro.open("../Desafio_evaluativo__/usuarios.txt", ios::in);
@@ -356,7 +356,7 @@ bool acceso::Desplegar1(string UserName){
         }
     }
     string key,user,compararclave;
-    for (int t=0;t<1;t++){
+    for (int t=0;t<(cantidad()-1);t++){
         user=arreglo[contador3][0];
         if (UserName==user){
             flag=true;
@@ -368,7 +368,7 @@ bool acceso::Desplegar1(string UserName){
         if (flag==true){
             cout<<"ingrese clave: ";
             cin>>key;
-            if((key+' ')==compararclave){
+            if((key+'\n')==compararclave){
                 return true;
             }
             else{
