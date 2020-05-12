@@ -379,7 +379,8 @@ string comboss::comboseleccionado(string idparacombo)
     int limite=funcionesss.cantidad2()-1;
     idparacombo+=' ';
     for(int i=0;i<limite;i++){
-        if(idparacombo==arreg[i][0]){
+        string problema=arreg[i][0];
+        if(idparacombo==problema){
             return arreg[i][2];
         }
     }
@@ -445,9 +446,11 @@ string comboss::pagocomborealizado(int idparacombos)
         for(int r=0;r<2;r++){
             arr=arreglo[j][r];
             registross<<arr;
-            if (r==1 && j==cantidad2-1){
+            if(r==1 && j!=cantidad2-1){
                 registross<<'\n';
+
             }
+
         }
     }
     registro.close();
@@ -582,7 +585,7 @@ string comboss::combosdisponibles()
 
             }
     }
-    int ayuda;
+    int ayuda,contador44=0;
     string u,f,w;
     for (int i=0;i<cantidad2;i++){
         u=arreglo[i][1];
@@ -617,7 +620,11 @@ string comboss::combosdisponibles()
             return w;
         }
         else{
+            contador44+=1;
+            if (contador44==cantidad2-1){
 
+                return "Final";
+            }
         }
 
     }
@@ -629,7 +636,7 @@ string comboss::alteracionencombos(string numeroparacombos)
     acceso funcionessss;
     string datos,arr;
     string arreglo[funcionessss.cantidad2()][3];
-    int contador1=0,contador2=0,cantidad2=funcionessss.cantidad2();
+    int contador1=0,contador2=0,cantidad2=funcionessss.cantidad2(),contador44=0;
     ifstream registro;
     registro.open("../Desafio_evaluativo__/Combos.txt", ios::in);
     if (registro.fail())
@@ -687,9 +694,34 @@ string comboss::alteracionencombos(string numeroparacombos)
 
         }
         else{
+            contador44+=1;
+            if (contador44==cantidad2-1){
 
+                return "Final";
+            }
         }
 
     }
     return "Final";
 }
+
+bool comboss::reportedeventas(string idparacomboss, string asiento, string sala, string UserName)
+{
+    ofstream registro;
+    registro.open("../Desafio_evaluativo__/Reportedeventas.txt", ios::app);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    registro<<"El dia de hoy se realizo la venta del combo numero: ";
+    registro<<idparacomboss;
+    registro<<" al señor(a) con el usuario: ";
+    registro<<UserName;
+    registro<<" y el combo se le llevo a la sala: ";
+    registro<<sala;
+    registro<<" con asiento: ";
+    registro<<asiento;
+    registro<<".........";
+    registro<<endl;
+
+    return true;
+}
+
