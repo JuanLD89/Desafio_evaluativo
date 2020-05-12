@@ -551,5 +551,74 @@ void comboss::cantidaddeproductosparaelcombo(int combo)
 
 string comboss::combosdisponibles()
 {
+    acceso funcionessss;
+    string datos,arr;
+    string arreglo[funcionessss.cantidad3()][2];
+    int contador1=0,contador2=0,restante,cantidad2=funcionessss.cantidad3();
+    ifstream registro;
+    registro.open("../Desafio_evaluativo__/C_combos.txt", ios::in);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    while (registro.good()){
+        char tem=registro.get();
+        if (registro.good()){
+            if (tem!=' ' || tem!='\n'){
+                if (tem==' '){
+                }
+                if (tem=='\n'){}
+                else{
+                    datos+=tem;
+                }
+                }
+            if (tem==' ' || tem=='\n'){
+                arreglo[contador2][contador1]=datos;
+                contador1=contador1+1;
+                if (tem=='\n'){
+                    contador2=contador2+1;
+                    contador1=0;
+                    }
+                datos="";
+                }
 
+            }
+    }
+    int ayuda;
+    string u,f;
+    for (int i=0;i<cantidad2;i++){
+        u=arreglo[i][1];
+        restante=stoi(u);
+        f=arreglo[i][0];
+        string palabra= f;
+        size_t tam= palabra.length();
+        palabra.erase(tam-1);
+        ayuda=stoi(palabra);
+
+        if (restante==0){
+            arreglo[i][0]="0";
+            arreglo[i][1]="0";
+            ofstream regi;
+            regi.open("../Desafio_evaluativo__/C_combos.txt", ios::out);
+            if (regi.fail())
+                cerr << "Error----------------" << endl;
+            for(int j=0;j<cantidad2;j++){
+                for(int r=0;r<2;r++){
+                    arr=arreglo[j][r];
+                    if (arr!="0"){
+                        regi<<arr;
+                        if(r==1 && j!=cantidad2-1){
+                            regi<<'\n';
+                        }
+                    }
+
+                }
+            }
+
+        }
+        else{
+            return "Final";
+
+        }
+
+    }
+    return "Final";
 }

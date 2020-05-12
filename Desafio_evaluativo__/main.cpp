@@ -157,6 +157,7 @@ int main()
                 acceso Usuario;
                 int b=1,cant, paracambio;
                 while (b==1){
+                    Crearcomboss.combosdisponibles();
                     cout<<"Ingrese Usuario: ";
                     cin>>UserName;
                     confirmacion=Usuario.Desplegar1((UserName+ ' '));
