@@ -18,7 +18,7 @@ int main()
     string resultadocombo,idplus,informacion,idcombo,nombrecombo,combo,valor_combo,cantidad_combos;
     comboss Crearcomboss;
     acceso Usuario;
-    int a, accion,adminprimeropcion,aentero,plusproductoexistente,temporal, pago,devuelta;
+    int a, accion,adminprimeropcion,aentero,plusproductoexistente,temporal, pago,devuelta,cppc;
     int adminousuario=1,eleccion___;
     while (adminousuario==1){
         cout<<"Que accion desea tomar:"<<endl;
@@ -123,14 +123,19 @@ int main()
                             informacion=Usuario.inventario();
                             cout <<endl;
                             cout <<endl;
-                            cout <<"-Escriba el ID de los productos que requiere el combo y la cantidad de estos separados por coma"<<endl;
-                            cout <<"-Separa con punto y coma los diferentes productos: ";      cin>>combo;
-                            cout <<"-Esriba el valor que desea ponerle al combo: ";        cin >>valor_combo;
                             cout<< "-Ingrese cantidad de combos que desea crear: "; cin>>cantidad_combos;
+                            cout <<"-Escriba el ID de los productos que requiere cada combo y la cantidad de estos separados por coma"<<endl;
+                            cout <<"-Separa con punto y coma los diferentes productos: ";      cin>>combo;
+                            cppc=stoi(cantidad_combos);
                             Crearcomboss.codigocombos(combo);
+                            Crearcomboss.cantidaddeproductosparaelcombo(cppc);
+                            cout <<"-Esriba el valor que desea ponerle al combo: ";        cin >>valor_combo;
                             resultadocombo=Crearcomboss.productosdesencriptados(idcombo,nombrecombo,valor_combo);
-                            Crearcomboss.cntidadcombos(idcombo,cantidad_combos);
                             cout<<resultadocombo<<endl;
+                            if (resultadocombo=="Combo creado...."){
+                                Crearcomboss.cntidadcombos(idcombo,cantidad_combos);
+                            }
+
                         }
 
                         if (accion==4){

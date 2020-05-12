@@ -24,6 +24,8 @@ public:
     void sordenusuario(int valor);
     string pagocomborealizado(int idparacombos);
     bool cntidadcombos(string idcc,string cantidad_combos);
+    void cantidaddeproductosparaelcombo(int combo);
+    string combosdisponibles();
 
 };
 

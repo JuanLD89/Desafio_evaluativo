@@ -433,14 +433,6 @@ string comboss::pagocomborealizado(int idparacombos)
     }
     datos=arreglo[idparacombos-1][1];
     int contadoressss=0;
-    /*for(int i=0;i<100;i++){
-        std::string cotadoress = std::to_string(contadoressss);
-        cotadoress+=' ';
-        if (cotadoress==datos){
-            break;
-        }
-        contadoressss+=1;
-    }*/
     contadoressss=stoi(datos);
     restante=contadoressss-1;
     std::string numeroComoCadena = std::to_string(restante);
@@ -474,4 +466,90 @@ bool comboss::cntidadcombos(string idcc,string cantidad_combos)
     registro<<endl;
 
     return true;
+}
+
+void comboss::cantidaddeproductosparaelcombo(int combo)
+{
+    string datos,arr;
+    bool flag=false;
+    string arreglo[puntoycoma()][2];
+    int contador1=0,contador2=0,cantidad2=puntoycoma();
+    ifstream registro;
+    registro.open("../Desafio_evaluativo__/Codigocombos.txt", ios::in);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    while (registro.good()){
+        char tem=registro.get();
+        if (registro.good()){
+            if (flag==true){
+            }
+            if (tem!=',' || tem!=';'){
+                if (tem==','){
+                }
+                else{
+                    datos+=tem;
+                }
+                }
+            if (tem==',' || tem==';' || tem=='\n'){
+                arreglo[contador2][contador1]=datos;
+                contador1=contador1+1;
+                if (tem==';'){
+                    contador2=contador2+1;
+                    contador1=0;
+                    }
+                datos="";
+                }
+            }
+    }
+    string primeraparte1;
+    for(int i=0;i<cantidad2;i++){
+        primeraparte1=arreglo[i][0];
+        arreglo[i][0]=primeraparte1+',';
+    }
+    string primeraparte;
+    int primeraparteentera;
+    bool falg1=false;
+    for(int i=0;i<cantidad2;i++){
+        primeraparte=arreglo[i][1];
+        string palabra= primeraparte;
+        size_t tam= palabra.length();
+        if (palabra[tam-1]=='\n'){
+            falg1=true;
+        }
+        else{
+            falg1=false;
+        }
+        palabra.erase(tam-1);
+        primeraparteentera=stoi(palabra);
+        primeraparteentera*=combo;
+        primeraparte=to_string(primeraparteentera);
+        if (falg1==false){
+            arreglo[i][1]=primeraparte+';';
+        }
+        else {
+            arreglo[i][1]=primeraparte+'\n';
+        }
+    }
+    ofstream regi;
+    regi.open("../Desafio_evaluativo__/Codigocombos.txt", ios::out);
+    if (regi.fail())
+        cerr << "Error----------------" << endl;
+    for(int j=0;j<cantidad2;j++){
+        for(int r=0;r<2;r++){
+            arr=arreglo[j][r];
+            regi<<arr;
+            if (r==2 && j!=cantidad2-1){
+                regi<<';';
+            }
+            if(r==2 && j==cantidad2-1){
+                regi<<'\n';
+            }
+        }
+    }
+
+}
+
+string comboss::combosdisponibles()
+{
+
 }
