@@ -583,7 +583,7 @@ string comboss::combosdisponibles()
             }
     }
     int ayuda;
-    string u,f;
+    string u,f,w;
     for (int i=0;i<cantidad2;i++){
         u=arreglo[i][1];
         restante=stoi(u);
@@ -594,6 +594,7 @@ string comboss::combosdisponibles()
         ayuda=stoi(palabra);
 
         if (restante==0){
+            w=arreglo[i][0];
             arreglo[i][0]="0";
             arreglo[i][1]="0";
             ofstream regi;
@@ -612,10 +613,80 @@ string comboss::combosdisponibles()
 
                 }
             }
+            regi.close();
+            return w;
+        }
+        else{
+
+        }
+
+    }
+    return "Final";
+}
+
+string comboss::alteracionencombos(string numeroparacombos)
+{
+    acceso funcionessss;
+    string datos,arr;
+    string arreglo[funcionessss.cantidad2()][3];
+    int contador1=0,contador2=0,cantidad2=funcionessss.cantidad2();
+    ifstream registro;
+    registro.open("../Desafio_evaluativo__/Combos.txt", ios::in);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    while (registro.good()){
+        char tem=registro.get();
+        if (registro.good()){
+            if (tem!=' ' || tem!='\n'){
+                if (tem==' '){
+                }
+                if (tem=='\n'){}
+                else{
+                    datos+=tem;
+                }
+                }
+            if (tem==' ' || tem=='\n'){
+                arreglo[contador2][contador1]=datos;
+                contador1=contador1+1;
+                if (tem=='\n'){
+                    contador2=contador2+1;
+                    contador1=0;
+                    }
+                datos="";
+                }
+
+            }
+    }
+    string u,f,g;
+    for (int i=0;i<cantidad2;i++){
+        g=arreglo[i][2];
+        u=arreglo[i][1];
+        f=arreglo[i][0];
+
+
+        if (f==numeroparacombos){
+            arreglo[i][0]="0";
+            arreglo[i][1]="0";
+            arreglo[i][2]="0";
+            ofstream regi;
+            regi.open("../Desafio_evaluativo__/Combos.txt", ios::out);
+            if (regi.fail())
+                cerr << "Error----------------" << endl;
+            for(int j=0;j<cantidad2;j++){
+                for(int r=0;r<3;r++){
+                    arr=arreglo[j][r];
+                    if (arr!="0"){
+                        regi<<arr;
+                        if(r==2 && j!=cantidad2-1){
+                            regi<<'\n';
+                        }
+                    }
+
+                }
+            }
 
         }
         else{
-            return "Final";
 
         }
 

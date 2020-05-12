@@ -26,6 +26,7 @@ public:
     bool cntidadcombos(string idcc,string cantidad_combos);
     void cantidaddeproductosparaelcombo(int combo);
     string combosdisponibles();
+    string alteracionencombos(string numeroparacombos);
 
 };
 

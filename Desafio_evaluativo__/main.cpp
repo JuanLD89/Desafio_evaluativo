@@ -152,12 +152,13 @@ int main()
 
 
             if (eleccion___==2){
-                string menu, idparacombo;
+                string menu, idparacombo,numeroparacombo;
                 string segdaopcion,sala,asiento;
                 acceso Usuario;
                 int b=1,cant, paracambio;
                 while (b==1){
-                    Crearcomboss.combosdisponibles();
+                    numeroparacombo=Crearcomboss.combosdisponibles();
+                    Crearcomboss.alteracionencombos(numeroparacombo);
                     cout<<"Ingrese Usuario: ";
                     cin>>UserName;
                     confirmacion=Usuario.Desplegar1((UserName+ ' '));
