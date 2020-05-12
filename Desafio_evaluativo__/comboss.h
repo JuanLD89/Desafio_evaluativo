@@ -28,6 +28,7 @@ public:
     string combosdisponibles();
     string alteracionencombos(string numeroparacombos);
     bool reportedeventas(string idparacomboss,string asiento,string sala,string UserName);
+    string reportedeventasimpresion();
 
 };
 

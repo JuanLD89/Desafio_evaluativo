@@ -711,11 +711,11 @@ bool comboss::reportedeventas(string idparacomboss, string asiento, string sala,
     registro.open("../Desafio_evaluativo__/Reportedeventas.txt", ios::app);
     if (registro.fail())
         cerr << "Error" << endl;
-    registro<<"El dia de hoy se realizo la venta del combo numero: ";
+    registro<<"-El dia de hoy se realizo la venta del combo numero: ";
     registro<<idparacomboss;
     registro<<" al señor(a) con el usuario: ";
     registro<<UserName;
-    registro<<" y el combo se le llevo a la sala: ";
+    registro<<"\nel combo se le llevo a la sala: ";
     registro<<sala;
     registro<<" con asiento: ";
     registro<<asiento;
@@ -723,5 +723,22 @@ bool comboss::reportedeventas(string idparacomboss, string asiento, string sala,
     registro<<endl;
 
     return true;
+}
+
+string comboss::reportedeventasimpresion()
+{
+    string info;
+    ifstream registro;
+    registro.open("../Desafio_evaluativo__/Reportedeventas.txt", ios::in);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    while (registro.good()){
+        char tem=registro.get();
+        if (registro.good()){
+            info+=tem;
+        }
+
+    }
+    return info;
 }
 

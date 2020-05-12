@@ -139,7 +139,7 @@ int main()
                         }
 
                         if (accion==4){
-                            cout<<"En mantenimiento.........."<<endl;
+                            cout<<Crearcomboss.reportedeventasimpresion()<<endl;
                         }
                         if (accion==5){
                             cout<<endl;
@@ -155,7 +155,7 @@ int main()
                 string menu, idparacombo="0",numeroparacombo;
                 string segdaopcion,sala,asiento;
                 acceso Usuario;
-                int b=1,cant, paracambio;
+                int b=1, paracambio;
                 while (b==1){
                     numeroparacombo=Crearcomboss.combosdisponibles();
                     Crearcomboss.alteracionencombos(numeroparacombo);
@@ -225,7 +225,7 @@ int main()
                                         Crearcomboss.pagocomborealizado(paracambio);
                                         cout<<endl;
                                         cout<<"Favor, si ya ha realizado la compra de su combo digite 2 para terminar pedido y registrar su compra "<<endl;
-                                        cout<<"Gracias por su colaboración......."<<endl;
+                                        cout<<"Gracias por su colaboracion......."<<endl;
                                         cout<<endl;
                                     }
                                     else{
