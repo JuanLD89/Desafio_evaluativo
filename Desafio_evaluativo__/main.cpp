@@ -14,7 +14,7 @@ int main()
 {
     bool confirmacion;
     char producto[100];
-    string UserName,clave1,id,cantidad,costo,producto1="",actualizar;
+    string UserName,clave1,id,cantidad,costo,producto1="",actualizar, nombrepararegistro,contrasenapararegistro;
     string resultadocombo,idplus,informacion,idcombo,nombrecombo,combo,valor_combo,cantidad_combos;
     comboss Crearcomboss;
     acceso Usuario;
@@ -52,15 +52,21 @@ int main()
                         cout<<"------------------------------------"<<endl;
                         cout<<"|              MENU                |"<<endl;
                         cout<<"------------------------------------"<<endl;
-                        cout<<"|1.Ingresar productos al inventario|"<<endl;
-                        cout<<"|2.      Mostrar Inventario        |"<<endl;
-                        cout<<"|3.         Crear combos           |"<<endl;
-                        cout<<"|4. Reporte de ventas realizadas   |"<<endl;
-                        cout<<"|5.            Salir               |"<<endl;
+                        cout<<"|1.     Agregar usuario nuevo      |"<<endl;
+                        cout<<"|2.Ingresar productos al inventario|"<<endl;
+                        cout<<"|3.      Mostrar Inventario        |"<<endl;
+                        cout<<"|4.         Crear combos           |"<<endl;
+                        cout<<"|5. Reporte de ventas realizadas   |"<<endl;
+                        cout<<"|6.            Salir               |"<<endl;
                         cout<<"------------------------------------"<<endl;
 
                         cin >> accion;
                         if (accion==1){
+                            cout<<"Ingrese el nombre del usuario: ";    cin>>nombrepararegistro;
+                            cout<<"Ingrese la contraseña que desee: ";  cin>>contrasenapararegistro;
+                            Usuario.agregarusuario(nombrepararegistro,contrasenapararegistro);
+                        }
+                        if (accion==2){
                             cout<<"1. Agregar producto existente al inventario"<<endl;
                             cout<<"2. Agregar producto nuevo al inventario    "<<endl;
                             cin>>adminprimeropcion;
@@ -103,14 +109,14 @@ int main()
                                 producto1="";
                             }
                         }
-                        if (accion==2){
+                        if (accion==3){
                             cout<<endl;
                             cout<<" ||=======================================================||"<<endl;
                             cout<<" ||               Inventario de productos                 ||"<<endl;
                             cout<<" ||=======================================================||"<<endl;
                             Usuario.inventario();
                         }
-                        if (accion==3){
+                        if (accion==4){
                             idcombo=Usuario.generaridcombo();
                             temporal=stoi(idcombo);
                             temporal+=1;
@@ -138,10 +144,10 @@ int main()
 
                         }
 
-                        if (accion==4){
+                        if (accion==5){
                             cout<<Crearcomboss.reportedeventasimpresion()<<endl;
                         }
-                        if (accion==5){
+                        if (accion==6){
                             cout<<endl;
                             a=0;
                         }

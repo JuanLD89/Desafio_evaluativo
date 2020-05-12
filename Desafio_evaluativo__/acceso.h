@@ -27,6 +27,7 @@ public:
     string inventario();
     string generarid();
     string generaridcombo();
+    bool agregarusuario(string usuario, string contasena);
 
 };
 

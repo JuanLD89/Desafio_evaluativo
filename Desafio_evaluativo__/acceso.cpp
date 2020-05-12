@@ -346,6 +346,20 @@ string acceso::generaridcombo()
     return datos;
 }
 
+bool acceso::agregarusuario(string usuario, string contasena)
+{
+    ofstream registro;
+    registro.open("../Desafio_evaluativo__/usuarios.txt", ios::app);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    registro<<usuario;
+    registro<<" ";
+    registro<<contasena;
+    registro<<endl;
+
+    return true;
+}
+
 
 bool acceso::Desplegar1(string UserName){
     bool flag=false;
