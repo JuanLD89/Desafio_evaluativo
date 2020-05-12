@@ -19,10 +19,11 @@ public:
     int saltosdelinea();
     int puntoycoma();
     bool existencia();
-    string menucombos();
+    void menucombos();
     string comboseleccionado(string idparacombo);
     void sordenusuario(int valor);
-    string pagocomborealizado();
+    string pagocomborealizado(int idparacombos);
+    bool cntidadcombos(string idcc,string cantidad_combos);
 
 };
 

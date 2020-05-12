@@ -14,7 +14,8 @@ int main()
 {
     bool confirmacion;
     char producto[100];
-    string UserName,clave1,UserName1,id,cantidad,costo,producto1,actualizar,resultadocombo,idplus,informacion,idcombo,nombrecombo,combo,valor_combo;
+    string UserName,clave1,UserName1,id,cantidad,costo,producto1="",actualizar;
+    string resultadocombo,idplus,informacion,idcombo,nombrecombo,combo,valor_combo,cantidad_combos;
     comboss Crearcomboss;
     acceso Usuario;
     int a, accion,adminprimeropcion,aentero,plusproductoexistente,temporal, pago,devuelta;
@@ -31,12 +32,18 @@ int main()
             cin>>UserName;
             clave1=Usuario.Desplegar();
             confirmacion=Usuario.accesos(UserName,clave1);
+            if (confirmacion==false){
+                cout << "acceso denegado"<<endl;
+                cout<<endl;
+            }
             if (confirmacion==true){
                 if (confirmacion==true){
                     cout<< "acceso permitido"<<endl;
+                    cout<<endl;
                 }
                 else {
                     cout << "acceso denegado"<<endl;
+                    cout <<endl;
                 }
                 if (confirmacion==true){
                     a=1;
@@ -93,6 +100,7 @@ int main()
                                 cout<<"-Ingrese Cantidad: "; cin >> cantidad;
                                 cout<<"-Ingrese costo: "; cin >> costo;
                                 Usuario.agregar(id,producto1,cantidad,costo);
+                                producto1="";
                             }
                         }
                         if (accion==2){
@@ -108,16 +116,21 @@ int main()
                             temporal+=1;
                             idcombo=to_string(temporal);
                             cout<<"Que nombre desea ponerle al combo?: ";  cin>>nombrecombo;
+                            cout<<endl;
+                            cout<<" ||=======================================================||"<<endl;
+                            cout<<" ||               Inventario de productos                 ||"<<endl;
+                            cout<<" ||=======================================================||"<<endl;
                             informacion=Usuario.inventario();
-                            cout << informacion;
                             cout <<endl;
-                            cout <<"Escriba el ID de los productos que requiere el combo y la cantidad de estos separados por coma"<<endl;
-                            cout <<"Separa con punto y coma los diferentes productos: ";      cin>>combo;
-                            cout <<"Esriba el valor que desea ponerle al combo: ";        cin >>valor_combo;
+                            cout <<endl;
+                            cout <<"-Escriba el ID de los productos que requiere el combo y la cantidad de estos separados por coma"<<endl;
+                            cout <<"-Separa con punto y coma los diferentes productos: ";      cin>>combo;
+                            cout <<"-Esriba el valor que desea ponerle al combo: ";        cin >>valor_combo;
+                            cout<< "-Ingrese cantidad de combos que desea crear: "; cin>>cantidad_combos;
                             Crearcomboss.codigocombos(combo);
                             resultadocombo=Crearcomboss.productosdesencriptados(idcombo,nombrecombo,valor_combo);
+                            Crearcomboss.cntidadcombos(idcombo,cantidad_combos);
                             cout<<resultadocombo<<endl;
-
                         }
 
                         if (accion==4){
@@ -134,96 +147,98 @@ int main()
 
 
             if (eleccion___==2){
-                comboss Combi;
                 string menu, idparacombo;
                 string segdaopcion,sala,asiento;
                 acceso Usuario;
-                int b=1,cant;
+                int b=1,cant, paracambio;
                 while (b==1){
-                cout<<"Ingrese Usuario: ";
-                cin>>UserName;
-                confirmacion=Usuario.Desplegar1((UserName+ ' '));
-                if (confirmacion==true){
-                    cout<< "Acceso permitido"<<endl;
-                }
-                else {
-                    cout << "Acceso denegado"<<endl;
-                }
-                if (confirmacion==true){
-                    cout<<endl;
-                    cout<<" ||=======================================================||"<<endl;
-                    cout<<" ||                    Oferta de Combos                   ||"<<endl;
-                    cout<<" ||=======================================================||"<<endl;
-                    cout<<" ||    ID                 Combo                 Precio    ||"<<endl;
-                    cout<<" ||=======================================================||"<<endl;
-                    Combi.menucombos();
-                    cout<<endl;
-                    a=1;
-                    while(a==1){
+                    cout<<"Ingrese Usuario: ";
+                    cin>>UserName;
+                    confirmacion=Usuario.Desplegar1((UserName+ ' '));
+                    if (confirmacion==true){
+                        cout<< "Acceso permitido"<<endl;
+                    }
+                    else {
+                        cout << "Acceso denegado"<<endl;
+                        cout <<endl;
+                        b=0;
+                    }
+                    if (confirmacion==true){
                         cout<<endl;
-                        cout<<"------------------------------------"<<endl;
-                        cout<<"|              MENU                |"<<endl;
-                        cout<<"------------------------------------"<<endl;
-                        cout<<"|1.       seleccionar combo        |"<<endl;
-                        cout<<"|2.        Terminar pedido         |"<<endl;
-                        cout<<"|3.            Salir               |"<<endl;
-                        cout<<"------------------------------------"<<endl;
+                        cout<<" ||=======================================================||"<<endl;
+                        cout<<" ||                    Oferta de Combos                   ||"<<endl;
+                        cout<<" ||=======================================================||"<<endl;
+                        cout<<" ||    ID                 Combo                 Precio    ||"<<endl;
+                        cout<<" ||=======================================================||"<<endl;
+                        Crearcomboss.menucombos();
                         cout<<endl;
-                        cin >> accion;
-                        if (accion==1){
-                            int valor;
-                            if (Usuario.generaridcombo()=="0"){
-                                cout<<"No hay ningun combo disponible al momento....."<<endl;
-                            }
-                            else{
-                                cout<<"-Elija el combo que desea ordenar ecribiendo el ID de este: ";  cin>>idparacombo;
-                                segdaopcion=Crearcomboss.comboseleccionado(idparacombo);
-                                cout<<segdaopcion<<endl;
-                                valor=stoi(segdaopcion);
-                                Crearcomboss.sordenusuario(valor);
-                                cout<<"Ingrese billete o moneda para el pago: ";  cin>>pago;
-                                cout<<"Ingrese cantidad de este: "; cin>>cant;
-                                pago=pago*cant;
-                                devuelta=valor-pago;
-                                if (devuelta>0){
-                                    cout<<"Para completar el pago hace falta: "<<devuelta<<endl;
+                        a=1;
+                        while(a==1){
+                            cout<<endl;
+                            cout<<"------------------------------------"<<endl;
+                            cout<<"|              MENU                |"<<endl;
+                            cout<<"------------------------------------"<<endl;
+                            cout<<"|1.       seleccionar combo        |"<<endl;
+                            cout<<"|2.        Terminar pedido         |"<<endl;
+                            cout<<"|3.            Salir               |"<<endl;
+                            cout<<"------------------------------------"<<endl;
+                            cout<<endl;
+                            cin >> accion;
+                            if (accion==1){
+                                int valor;
+                                if (Usuario.generaridcombo()=="0"){
+                                    cout<<"No hay ningun combo disponible al momento....."<<endl;
                                 }
-                                while (devuelta>0){
-                                    Crearcomboss.sordenusuario(pago);
+                                else{
+                                    cout<<"-Elija el combo que desea ordenar ecribiendo el ID de este: ";  cin>>idparacombo;
+                                    segdaopcion=Crearcomboss.comboseleccionado(idparacombo);
+                                    cout<<segdaopcion<<endl;
+                                    valor=stoi(segdaopcion);
+                                    Crearcomboss.sordenusuario(valor);
                                     cout<<"Ingrese billete o moneda para el pago: ";  cin>>pago;
                                     cout<<"Ingrese cantidad de este: "; cin>>cant;
                                     pago=pago*cant;
-                                    devuelta=devuelta-pago;
-                                    if (devuelta<0){
-                                        break;
+                                    devuelta=valor-pago;
+                                    if (devuelta>0){
+                                        cout<<"Para completar el pago hace falta: "<<devuelta<<endl;
                                     }
-                                    cout<<"Para completar el pago hace falta: "<<devuelta;
+                                    while (devuelta>0){
+                                        Crearcomboss.sordenusuario(pago);
+                                        cout<<"Ingrese billete o moneda para el pago: ";  cin>>pago;
+                                        cout<<"Ingrese cantidad de este: "; cin>>cant;
+                                        pago=pago*cant;
+                                        devuelta=devuelta-pago;
+                                        if (devuelta<0){
+                                            break;
+                                        }
+                                        cout<<"Para completar el pago hace falta: "<<devuelta;
+                                    }
+                                    cout<<"Su devuelta es de: "<<abs(devuelta)<<endl;
+                                    Crearcomboss.sordenusuario(abs(devuelta));
+                                    paracambio=stoi(idparacombo);
+                                    Crearcomboss.pagocomborealizado(paracambio);
                                 }
-                                cout<<"Su devuelta es de: "<<abs(devuelta)<<endl;
-                                Crearcomboss.sordenusuario(abs(devuelta));
                             }
-                        }
-                        if (accion==2){
-                            if (Usuario.generaridcombo()!="0"){
-                                cout<<"No hay ningun combo disponible al momento....."<<endl;
-                                cout<<"Favor ingresar el numero de la sala: ";  cin>>sala;
-                                cout<<"Favor ingresar el numero de la sala: ";  cin>>asiento;
+                            if (accion==2){
+                                if (Usuario.generaridcombo()!="0"){
+                                    cout<<"No hay ningun combo disponible al momento....."<<endl;
+                                    cout<<"Favor ingresar el numero de la sala: ";  cin>>sala;
+                                    cout<<"Favor ingresar el numero de la sala: ";  cin>>asiento;
+                                    cout<<endl;
+                                    cout<<"Le llevaremos su pedido la sala numero "<<sala<<" al asiento "<<asiento<<endl;
+                                }
+                            }
+                            if (accion==3){
                                 cout<<endl;
-                                cout<<"Le llevaremos su pedido la sala numero "<<sala<<" al asiento "<<asiento<<endl;
+                                b=0;
+                                a=0;
                             }
-                        }
-                        if (accion==3){
-                            cout<<endl;
-                            b=0;
-                            a=0;
                         }
                     }
                 }
-              }
             }
-            if (eleccion___==3){
-                cout<<endl;
-                return 0;
-            }
+        if (eleccion___==3){
+            return 0;
+        }
     }
 }

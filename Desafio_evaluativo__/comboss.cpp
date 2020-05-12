@@ -319,7 +319,7 @@ bool comboss::existencia()
     return flag;
 }
 
-string comboss::menucombos()
+void comboss::menucombos()
 {
     string info;
     ifstream registro;
@@ -342,7 +342,6 @@ string comboss::menucombos()
         }
 
     }
-    //return info;
 }
 
 string comboss::comboseleccionado(string idparacombo)
@@ -399,7 +398,80 @@ void comboss::sordenusuario(int valor)
     }
 }
 
-string comboss::pagocomborealizado()
+string comboss::pagocomborealizado(int idparacombos)
 {
+    acceso funcionessss;
+    string datos,arr;
+    string arreglo[funcionessss.cantidad3()][2];
+    int contador1=0,contador2=0,restante,cantidad2=funcionessss.cantidad3();
+    ifstream registro;
+    registro.open("../Desafio_evaluativo__/C_combos.txt", ios::in);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    while (registro.good()){
+        char tem=registro.get();
+        if (registro.good()){
+            if (tem!=' ' || tem!='\n'){
+                if (tem==' '){
+                }
+                if (tem=='\n'){}
+                else{
+                    datos+=tem;
+                }
+                }
+            if (tem==' ' || tem=='\n'){
+                arreglo[contador2][contador1]=datos;
+                contador1=contador1+1;
+                if (tem=='\n'){
+                    contador2=contador2+1;
+                    contador1=0;
+                    }
+                datos="";
+                }
 
+            }
+    }
+    datos=arreglo[idparacombos-1][1];
+    int contadoressss=0;
+    /*for(int i=0;i<100;i++){
+        std::string cotadoress = std::to_string(contadoressss);
+        cotadoress+=' ';
+        if (cotadoress==datos){
+            break;
+        }
+        contadoressss+=1;
+    }*/
+    contadoressss=stoi(datos);
+    restante=contadoressss-1;
+    std::string numeroComoCadena = std::to_string(restante);
+    arreglo[idparacombos-1][1]=numeroComoCadena;
+    ofstream registross;
+    registross.open("../Desafio_evaluativo__/C_combos.txt", ios::out);
+    if (registross.fail())
+        cerr << "Error" << endl;
+    for(int j=0;j<cantidad2;j++){
+        for(int r=0;r<2;r++){
+            arr=arreglo[j][r];
+            registross<<arr;
+            if (r==1 && j==cantidad2-1){
+                registross<<'\n';
+            }
+        }
+    }
+    registro.close();
+}
+
+
+bool comboss::cntidadcombos(string idcc,string cantidad_combos)
+{
+    ofstream registro;
+    registro.open("../Desafio_evaluativo__/C_combos.txt", ios::app);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    registro<<idcc;
+    registro<<" ";
+    registro<<cantidad_combos;
+    registro<<endl;
+
+    return true;
 }

@@ -32,6 +32,7 @@ bool acceso::agregar(string id, string producto, string cantidad, string costo)
     registro<<" ";
     registro<<costo;
     registro<<endl;
+    producto="";
 
     return true;
 }
@@ -152,6 +153,24 @@ int acceso::cantidad2()
     int cantidadparaarreglo=1;
     ifstream registro;
     registro.open("../Desafio_evaluativo__/Combos.txt", ios::in);
+    if (registro.fail())
+        cerr << "Error" << endl;
+    while (registro.good()){
+        char tem=registro.get();
+    if (registro.good()){
+        if (tem=='\n'){
+            cantidadparaarreglo+=1;
+            }
+        }
+    }
+    return cantidadparaarreglo;
+}
+
+int acceso::cantidad3()
+{
+    int cantidadparaarreglo=1;
+    ifstream registro;
+    registro.open("../Desafio_evaluativo__/C_combos.txt", ios::in);
     if (registro.fail())
         cerr << "Error" << endl;
     while (registro.good()){

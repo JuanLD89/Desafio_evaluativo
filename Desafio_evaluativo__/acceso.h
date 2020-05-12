@@ -22,6 +22,7 @@ public:
     int cantidad();
     int cantidad1();
     int cantidad2();
+    int cantidad3();
     int productexistente(int aentero,int plusproductoexistente, string idplus);
     string inventario();
     string generarid();
