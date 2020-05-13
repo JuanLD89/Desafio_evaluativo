@@ -207,14 +207,14 @@ int main()
                                     cout<<segdaopcion<<endl;        //imprime un mensaje string
                                     if (segdaopcion!="la ID ingresada no existe entre los combos........."){ //si segundaopcion es dierente a la ID ingresada no existe entre los combos........
                                         valor=stoi(segdaopcion);        //de string a entero
-                                        Crearcomboss.sordenusuario(valor);  //invoca la función sordenusuario para saber cuanto cuesta el combo
+                                        Crearcomboss.sordenusuario(valor);  //invoca la función sordenusuario para aplicar la función del problema1 practica2
                                         cout<<"Ingrese cantidad dinero para el pago: ";  cin>>pago;
                                         devuelta=valor-pago;        //resta el dinero ingresado con el valor del combo
                                         if (devuelta>0){
                                             cout<<"Para completar el pago hace falta: "<<devuelta<<endl;    //si falta dinero
                                         }
                                         while (devuelta>0){
-                                            Crearcomboss.sordenusuario(pago);       //invoca la función sordenusuario para saber cuanto cuesta el combo
+                                            Crearcomboss.sordenusuario(pago);       //invoca la función sordenusuario para aplicar la función del problema1 practica2
                                             cout<<"Ingrese billete o moneda para el pago: ";  cin>>pago;
                                             devuelta=devuelta-pago;                 //resta el dinero ingresado con el valor del combo
                                             if (devuelta<0){
@@ -224,7 +224,7 @@ int main()
                                         }
                                         cout<<"Su devuelta es de: "<<abs(devuelta)<<endl;
                                         if (abs(devuelta)!=0){          //vuelve positivo la devuelta en caso de sobrarle
-                                            Crearcomboss.sordenusuario(abs(devuelta));  //invoca la función sordenusuario para saber cuanto cuesta el combo
+                                            Crearcomboss.sordenusuario(abs(devuelta));  //invoca la función sordenusuario para aplicar la función del problema1 practica2
                                         }
                                         paracambio=stoi(idparacombo);                   //de string a int
                                         Crearcomboss.pagocomborealizado(paracambio);
