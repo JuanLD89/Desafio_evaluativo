@@ -567,7 +567,7 @@ void comboss::cantidaddeproductosparaelcombo(int combo)
 
 string comboss::combosdisponibles()
 {
-    /*Esta función se encarga de sobreescribir el archivo de texto donde se encuentran la cantidad de comobos elimnando los combos en donde ya no hay mas unidades disponibles*/
+    /*Esta función se encarga de sobreescribir el archivo de texto donde se encuentran la cantidad de combos elimnando los combos en donde ya no hay mas unidades disponibles*/
     acceso funcionessss;
     string datos,arr;
     string arreglo[funcionessss.cantidad3()][2];
