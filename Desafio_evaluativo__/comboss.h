@@ -16,7 +16,6 @@ public:
     bool codigocombos(string combo__);
     string productosdesencriptados(string idcombo,string nombrecombo,string valor_combo);
     string combocreado();
-    int saltosdelinea();
     int puntoycoma();
     bool existencia();
     void menucombos();

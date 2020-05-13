@@ -4,94 +4,112 @@
 
 bool comboss::agregarcombos(string idc, string nomcomb, string precomb)
 {
-    ofstream registro;
-    registro.open("../Desafio_evaluativo__/Combos.txt", ios::app);
+    /*Esta función recibe 3 parametros, el objetivo de esta es escribir al final del archivo combos, los nuevos
+      combos se digitara primero la identificación id/ espacio/ nombre del combo/ espacio/ el precio del combo/ y finalmente
+      un salto de linea*/
+    ofstream registro;          //ofstream Para escritura en el archivo
+    registro.open("../Desafio_evaluativo__/Combos.txt", ios::app);  //Abre el archivo y escribe al final de este
     if (registro.fail())
-        cerr << "Error" << endl;
-    registro<<idc;
-    registro<<" ";
-    registro<<nomcomb;
-    registro<<" ";
-    registro<<precomb;
-    registro<<endl;
+        cerr << "Error" << endl;            //en caso que ocurra un error al abrir el archivo, saldra error y se saldra de esta función
+    registro<<idc;              //escribe al final del archivo
+    registro<<" ";              //escribe al final del archivo
+    registro<<nomcomb;          //escribe al final del archivo
+    registro<<" ";              //escribe al final del archivo
+    registro<<precomb;          //escribe al final del archivo
+    registro<<endl;             //escribe al final del archivo
 
-    return true;
+    return true;        //retorna verdadero
 }
 
 bool comboss::codigocombos(string combo__)
 {
-    ofstream registro;
-    registro.open("../Desafio_evaluativo__/Codigocombos.txt", ios::out);
+    /*Esta función recibe 3 parametros, el objetivo de esta es sobreescribir el archivo Codigocombos, los nuevos
+      combos se digitara primero instrucciones del combo encriptadas y finalmente
+      un salto de linea*/
+    ofstream registro;          //ofsteram Para escritura en el archivo
+    registro.open("../Desafio_evaluativo__/Codigocombos.txt", ios::out);   //Abre el archivo y escribe al final de este
     if (registro.fail())
-        cerr << "Error" << endl;
-    registro<<combo__;
-    registro<<endl;
+        cerr << "Error" << endl;            //en caso que ocurra un error al abrir el archivo, saldra error y se saldra de esta función
+    registro<<combo__;      //escribe al final del archivo
+    registro<<endl;         //escribe al final del archivo
 
     return true;
 }
 
 string comboss::productosdesencriptados(string idcombo,string nombrecombo,string valor_combo)
 {
-    bool decisiva;
-    decisiva=existencia();
-    if (decisiva==false){
-        return "Una de las ID no existe.....";
-    }
-    acceso func;
-    string dat,arr;
-    string arreglo[puntoycoma()][2];
-    int cont1=0,cont2=0;
-    ifstream registro;
-    registro.open("../Desafio_evaluativo__/Codigocombos.txt", ios::in);
-    if (registro.fail())
-        cerr << "Error" << endl;
-    while (registro.good()){
-        char tem=registro.get();
-        if (registro.good()){
-            if (tem==',' || tem=='\n'){
-                arreglo[cont1][cont2]=dat;
-                dat="";
-                cont2+=1;
-            }
-            if (tem==';'){
-                arreglo[cont1][cont2]=dat;
-                cont1+=1;
-                cont2=0;
+    /*ingresa al archivo de texto Codigocombos lo desencripta tomando el valor antes de la coma como id del producto
+      y el numero despues de esta la cantidad, esta función tendra como parametros, la ide del combo, el nombre y su valor
+      ya que en esta misma función se invoca otra función que requiere estos parametros.
+      Esta función tambien se encarga de alterar el archivo productos descontando los necesarios para el combo,
+      la cantidad de combos que quieras se multiplicara por la cantidad de cada uno de los productos que hay en el
+      archivo de codigocombos.
+      Al final esta funcion retornara 3 posible strings que serian:
+      -Combo creado
+      -No cuenta con la cantidad suficiente de productos
+      -Una de las ID no existe.....
+      */
 
-                dat="";
+    bool decisiva;
+    decisiva=existencia();                                              //llama a otra función que se encuentra en esta misma clase
+    if (decisiva==false){                                               //la función existencia retornara un valor de verdad dependiendo de si el id existe o no
+        return "Una de las ID no existe.....";                          //si no existe retornara "Una de las ID no existe....."
+    }
+    acceso func;                                                        //conexión con la clase acceso
+    string dat,arr;                                                     //determinamos strings
+    string arreglo[puntoycoma()][2];                                    //Definimos un array, puntoycoma es una función qu eretorna un int
+    int cont1=0,cont2=0;                                                //definimos int
+    ifstream registro;                                                  //ifsteram Para lectura en el archivo
+    registro.open("../Desafio_evaluativo__/Codigocombos.txt", ios::in); //lee el archivo para hacer un arreglo con los datos de este
+    if (registro.fail())                                                //para ver si hay algún error
+        cerr << "Error" << endl;                                        //Imprime error
+    while (registro.good()){                                            //Mientras se encuentren datos
+        char tem=registro.get();                                        //tem sera un char y se obtiene caracter por caracter de registro.get
+        if (registro.good()){                                           //
+            if (tem==',' || tem=='\n'){                                 //Si el caracter contenido en tem es una coma o un punto y coma entrara dentro del if
+                arreglo[cont1][cont2]=dat;                              //el string contenido en dat para a ser el termino guardado en arreglo[cont1][cont2]
+                dat="";                                                 //dat nuevamete a ser un string vacio
+                cont2+=1;                                               //aumenta cont2 en 1 unidad
+            }
+            if (tem==';'){                                              //Si el caracter contenido en tem es un punto y coma entrara dentro del if
+                arreglo[cont1][cont2]=dat;                              //el string contenido en dat para a ser el termino guardado en arreglo[cont1][cont2]
+                cont1+=1;                                               //aumenta cont2 en 1 unidad
+                cont2=0;                                                //cont2 vuelve a ser 0, para la primera posición de cada uno de las listas dentro del arreglo
+
+                dat="";                                                  //dat nuevamete ser un string vacio
             }
             if (tem==',' || tem == ';' || tem =='\n'){
             }
             else{
-                dat+=tem;
+                dat+=tem;                                                   //Si es diferente de ,; o \n  a dat se aregal caracter tem
             }
         }
     }
     string datos="";
     string arreg[func.cantidad1()-1][4];
     int contador1=0,contador2=0,cantidad2=func.cantidad1()-1,temporal_,temporal_2;
-    ifstream regis;
-    regis.open("../Desafio_evaluativo__/Productos.txt", ios::in);
-    if (regis.fail())
-        cerr << "Error" << endl;
-    while (regis.good()){
-        char tem=regis.get();
+    ifstream regis;                                                                 //ifsteram Para lectura en el archivo
+    regis.open("../Desafio_evaluativo__/Productos.txt", ios::in);                   //lee el archivo para hacer un arreglo con los datos de este
+    if (regis.fail())                                                               //para ver si hay algún error
+        cerr << "Error" << endl;                                                    //Imprime error
+    while (regis.good()){                                                           //Mientras se encuentren datos
+        char tem=regis.get();                                                       //tem sera un char y se obtiene caracter por caracter de registro.get
         if (regis.good()){
-            if (tem!=' ' || tem!='\n'){
+            if (tem!=' ' || tem!='\n'){                                             //Si el caracter contenido en tem es una coma o un punto y coma entrara dentro del if
                 if (tem==' '){}
                 if (tem=='\n'){}
                 else{
-                    datos+=tem;
+                    datos+=tem;                                                     //Si es diferente de " " o \n  a dat se aregal caracter tem
                 }
                 }
-            if (tem==' ' || tem=='\n'){
-                arreg[contador2][contador1]=datos;
-                contador1=contador1+1;
+            if (tem==' ' || tem=='\n'){                                             //Si el caracter contenido en tem es un espacio o un salto de linea entrara dentro del if
+                arreg[contador2][contador1]=datos;                                  //el string contenido en datos para a ser el termino guardado en arreglo[contador1][contador2]
+                contador1=contador1+1;                                              //se aumenta contador1 en unaundad
                 if (tem=='\n'){
-                    contador2=contador2+1;
-                    contador1=0;
+                    contador2=contador2+1;                                          //se aumenta contador2 en una unidad
+                    contador1=0;                                                    //contador1 es igual a 0
                     }
-                datos="";
+                datos="";                                                           //datos vuelve a ser un string vacio
                 }
 
             }
@@ -102,69 +120,69 @@ string comboss::productosdesencriptados(string idcombo,string nombrecombo,string
     int c3=0;
     int contadorespecial=0;
     string compara1,compara2;
-    while(contadorespecial<puntoycoma()){
-        compara1=arreglo[c1][c2];
+    while(contadorespecial<puntoycoma()){                                           //contadorespecial iniciara en 0, y la funcion puntoycoma es la cantidad de puntos y coma +1 en el archivo de codigocombos
+        compara1=arreglo[c1][c2];                                                   //en esta linea y la siguiente se asignan valores para comparar entre codigocombos y productos
         compara2=arreg[c3][0];
         compara1+=' ';
-        if(contadorespecial==puntoycoma()-1){
+        if(contadorespecial==puntoycoma()-1){                                       //para parar el ciclo
             break;
         }
-        if (compara1==compara2){
-            c2+=1;
-            temporal_=stoi(arreg[c3][2]);
-            temporal_2=stoi(arreglo[c1][c2]);
-            if (temporal_>=temporal_2){
-                flag=true;
-                c1+=1;
+        if (compara1==compara2){                                                     //comparar entre cantidad en codigocombos y cantidad de productos, para saber si es posible realizar el combo con la cantidad deseada
+            c2+=1;                                                                   //aumenta c2 en una unidad
+            temporal_=stoi(arreg[c3][2]);                                            //de string a int
+            temporal_2=stoi(arreglo[c1][c2]);                                        //de string a int
+            if (temporal_>=temporal_2){                                              //compara la cantidad de deseada ara el combo y la cantidad de productos disponibles
+                flag=true;                                                           //bandera
+                c1+=1;                                                               //c1 aumenta en una unidad
                 c2=0;
                 c3=0;
 
-                contadorespecial+=1;
+                contadorespecial+=1;                                                  //contadorespecia aumenta en una unidad para luego comparar
             }
             else{
-                return "No tiene la cantidad de productos suficientes para este combo";
+                return "No tiene la cantidad de productos suficientes para este combo";// se sale de la funión y retorna No tiene la cantidad de productos suficientes para este combo
             }
          }
 
          else{
              flag=false;
          }
-        c3+=1;
+        c3+=1;                                                                          //c3 aumenta en una unidad
     }
     c1=0;
-    c2=0;
+    c2=0;                                                                                //c1, c2, c3 se igualan a 0
     c3=0;
-    contadorespecial=0;
+    contadorespecial=0;                                                                 //contador especial se iguala a 0
     if (flag==true){
-        while(contadorespecial<puntoycoma()){
-            compara1=arreglo[c1][c2];
+        while(contadorespecial<puntoycoma()){                                           //mientras contadorespecial sea menor que el numero de puntoycoma de codigocombo
+            compara1=arreglo[c1][c2];                                                   //se sacan de ambos arreglos que anteriormente se sacaron dos valores ara compararlos
             compara2=arreg[c3][0];
             compara1+=' ';
 
-            if (compara1==compara2){
-                c2+=1;
-                temporal_=stoi(arreg[c3][2]);
-                temporal_2=stoi(arreglo[c1][c2]);
-                if (temporal_>=temporal_2){
+            if (compara1==compara2){                                                     //Se comparan id
+                c2+=1;                                                                   //se aumenta c3 en 1 unidad
+                temporal_=stoi(arreg[c3][2]);                                            //de string a entero
+                temporal_2=stoi(arreglo[c1][c2]);                                        //de string a entero
+                if (temporal_>=temporal_2){                                              //se analizan cantidades
                     c1+=1;
                     c2=0;
                     contadorespecial+=1;
-                    restantess=temporal_-temporal_2;
-                    string numeroComoCadena = to_string(restantess);
-                    arreg[c3][2]=numeroComoCadena+ ' ';
+                    restantess=temporal_-temporal_2;                                      //En este paso restante vendria siendo la cantidad restante de productos,los peroductos que quedan luego de sacar los que van ppara el combo
+                    string numeroComoCadena = to_string(restantess);                      //De int a string
+                    arreg[c3][2]=numeroComoCadena+ ' ';                                   //se le agrega espacio en blanco para luego en la impresión
                     c3=0;
-                    ofstream regi;
-                    regi.open("../Desafio_evaluativo__/Productos.txt", ios::out);
-                    if (regi.fail())
-                        cerr << "Error----------------" << endl;
-                    for(int j=0;j<cantidad2;j++){
-                        for(int r=0;r<4;r++){
-                            arr=arreg[j][r];
-                            regi<<arr;
-                            if (r==3 && j<=cantidad2-2){
+                    ofstream regi;                                                      //ofstream Para escritura en el archivo
+                    regi.open("../Desafio_evaluativo__/Productos.txt", ios::out);       //Abre el archivo y lo sobreescribe
+                    if (regi.fail())                                                    //para ver si hay algún error al abrir el archivo
+                        cerr << "Error----------------" << endl;                        //imprime error
+                    for(int j=0;j<cantidad2;j++){                                       //este for es para moverse entre un arreglo en la primera posicion y poder sobreescribor el archivo abierto anteriormente
+                        for(int r=0;r<4;r++){                                           //este for es para moverse entre un arreglo en la segunda posicion y poder sobreescribor el archivo abierto anteriormente
+                            arr=arreg[j][r];                                            //a arr se le asigna un string perteneciente a un arreglo en la posicion [j][r]
+                            regi<<arr;                                                  //se escribe en el archivo
+                            if (r==3 && j<=cantidad2-2){                                //condiciones para escribir un salto de linea
                                 regi<<'\n';
                             }
-                            if(contadorespecial==puntoycoma() && r==3 && j==cantidad2-1){
+                            if(contadorespecial==puntoycoma() && r==3 && j==cantidad2-1){//condiciones para escribir un salto de linea
                                 regi<<'\n';
                             }
 
@@ -172,57 +190,41 @@ string comboss::productosdesencriptados(string idcombo,string nombrecombo,string
                         }
                     }
 
-                    regi.close();
+                    regi.close();                                                           //se cierra el archivo el cual se sobreescribio
                 }
              }
-            c3+=1;
+            c3+=1;                                                                          //se aumenta c3 en una unidad
         }
     }
     else{
-        return "Una de las ID no existe.....";
+        return "Una de las ID no existe.....";                                              //retornaun string indicando: "Una de las ID no existe....."
     }
-    agregarcombos(idcombo,nombrecombo,valor_combo);
-    return "Combo creado....";
+    agregarcombos(idcombo,nombrecombo,valor_combo);                                         //para esto se solicitaban los parametros en esta funcion, para darselos a estafunción llamada agregarcombos
+    return "Combo creado....";                                                              //retornaun string indicando: "Combo creado...."
 
-}
-
-int comboss::saltosdelinea()
-{
-    int cantidadparaarreglo=1;
-    ifstream registro;
-    registro.open("../Desafio_evaluativo__/Codigocombos.txt", ios::in);
-    if (registro.fail())
-        cerr << "Error" << endl;
-    while (registro.good()){
-        char tem=registro.get();
-    if (registro.good()){
-        if (tem=='\n'){
-            cantidadparaarreglo+=1;
-            }
-        }
-    }
-    return cantidadparaarreglo;
 }
 
 int comboss::puntoycoma()
 {
+    /*retorna un entero con una cantiad de puntos y coma del archivo de texto Codigocombos y esto para separar los
+      diferentes produtos de cada combo*/
     int cantidadparaarreglo=1;
-    ifstream registro;
-    registro.open("../Desafio_evaluativo__/Codigocombos.txt", ios::in);
-    if (registro.fail())
-        cerr << "Error" << endl;
-    while (registro.good()){
-        char tem=registro.get();
+    ifstream registro;                                                          //ifsteram Para lectura en el archivo
+    registro.open("../Desafio_evaluativo__/Codigocombos.txt", ios::in);         //lee el archivo para hacer un arreglo con los datos de este
+    if (registro.fail())                                                        //para ver si hay algún error al abrir el archivo
+        cerr << "Error" << endl;                                                //imprime error
+    while (registro.good()){                                                    //Mientras se encuentren datos
+        char tem=registro.get();                                                //tem sera un char y se obtiene caracter por caracter de registro.get
         if (registro.good()){
-            if (tem==';'){
-                cantidadparaarreglo+=1;
+            if (tem==';'){                                                      //Si el caracter contenido en tem es un salto de linea entrara dentro del if
+                cantidadparaarreglo+=1;                                         //cantidadparaarreglo se aumenta una unidad
             }
         }
         if (tem=='\n'){
-            return cantidadparaarreglo;
+            return cantidadparaarreglo;                                          //retorna un entero con una cantiad de puntos y coma
         }
     }
-    return cantidadparaarreglo;
+    return cantidadparaarreglo;                                                     //retorna un entero con una cantiad de puntos y coma
 }
 
 bool comboss::existencia()
@@ -230,29 +232,29 @@ bool comboss::existencia()
     string dat,arr;
     string arreg[puntoycoma()][2];
     int cont1=0,cont2=0;
-    ifstream regis;
-    regis.open("../Desafio_evaluativo__/Codigocombos.txt", ios::in);
-    if (regis.fail())
-        cerr << "Error" << endl;
-    while (regis.good()){
-        char tem=regis.get();
+    ifstream regis;                                                         //ifsteram Para lectura en el archivo
+    regis.open("../Desafio_evaluativo__/Codigocombos.txt", ios::in);        //lee el archivo para hacer un arreglo con los datos de este
+    if (regis.fail())                                                       //para ver si hay algún error al abrir el archivo
+        cerr << "Error" << endl;                                            //imprime error
+    while (regis.good()){                                                   //Mientras se encuentren datos
+        char tem=regis.get();                                               //tem sera un char y se obtiene caracter por caracter de registro.get
         if (regis.good()){
-            if (tem==',' || tem=='\n'){
-                arreg[cont1][cont2]=dat;
-                dat="";
-                cont2+=1;
+            if (tem==',' || tem=='\n'){                                     //Si el caracter contenido en tem es un salto de linea o una coma entrara dentro del if
+                arreg[cont1][cont2]=dat;                                    //el string contenido en datos para a ser el termino guardado en arreglo[cont1][cont2]
+                dat="";                                                     //dat es un string vacio
+                cont2+=1;                                                   //cont2 aumenta en una unidad
             }
-            if (tem==';'){
-                arreg[cont1][cont2]=dat;
-                cont1+=1;
-                cont2=0;
+            if (tem==';'){                                                   //Si el caracter contenido en tem es un punto y coma entrara dentro del if
+                arreg[cont1][cont2]=dat;                                     //el string contenido en datos para a ser el termino guardado en arreglo[cont1][cont2]
+                cont1+=1;                                                    //cont1 aumenta en una unidad
+                cont2=0;                                                     //cont2 vuelve a ser 0
 
-                dat="";
+                dat="";                                                        //dat es un string vacio
             }
             if (tem==',' || tem == ';' || tem =='\n'){
             }
             else{
-                dat+=tem;
+                dat+=tem;                                                      //Si es diferente de ,; o \n  a dat se aregal caracter tem
             }
         }
     }
@@ -260,7 +262,7 @@ bool comboss::existencia()
     string datos;
     string arreglo[funciones_.cantidad1()][4];
     int contador1=0,contador2=0;
-    ifstream registro;
+    ifstream registro;                                                      //ifsteram Para lectura en el archivo
     registro.open("../Desafio_evaluativo__/Productos.txt", ios::in);
     if (registro.fail())
         cerr << "Error" << endl;
@@ -286,6 +288,8 @@ bool comboss::existencia()
 
             }
     }
+    /*El pasado ciclo ya fue explicado en el ciclo anterior a este, la unica diferencia, es que el primero se encarga de leer
+      wl archivo Codigocombos y el pasado el archivo productos*/
     contador1=0;
     contador2=0;
     string pruebaspru,pruebaspru1;
@@ -321,24 +325,25 @@ bool comboss::existencia()
 
 void comboss::menucombos()
 {
+    /*Esta función es para imprimir el menú en pantalla*/
     string info;
-    ifstream registro;
-    registro.open("../Desafio_evaluativo__/Combos.txt", ios::in);
-    if (registro.fail())
-        cerr << "Error" << endl;
-    printf("%2c",' ');
-    printf("%c",' ');
+    ifstream registro;                                                  //ifsteram Para lectura en el archivo
+    registro.open("../Desafio_evaluativo__/Combos.txt", ios::in);       //lee el archivo para hacer un arreglo con los datos de este
+    if (registro.fail())                                                //revisa si hay algún error al abrir el archivo
+        cerr << "Error" << endl;                                        //imprime error
+    printf("%2c",' ');                                                  //printfc tambien es un tipo de cout
+    printf("%c",' ');                                                   //printfc tambien es un tipo de cout
     while (registro.good()){
         char tem=registro.get();
         if (registro.good()){
             info+=tem;
-            printf("%c",tem);
+            printf("%c",tem);                                           //printfc tambien es un tipo de cout
         }
         if (tem=='\n'){
 
             cout<<" ||=======================================================||"<<endl;
-            printf("%2c",' ');
-            printf("%c",' ');
+            printf("%2c",' ');                                          //printfc tambien es un tipo de cout
+            printf("%c",' ');                                           //printfc tambien es un tipo de cout
         }
 
     }
@@ -350,7 +355,7 @@ string comboss::comboseleccionado(string idparacombo)
     string datos="";
     string arreg[funcionesss.cantidad2()-1][3];
     int contador1=0,contador2=0;
-    ifstream regis;
+    ifstream regis;                                                     //ifsteram Para lectura en el archivo
     regis.open("../Desafio_evaluativo__/Combos.txt", ios::in);
     if (regis.fail())
         cerr << "Error" << endl;
@@ -389,13 +394,14 @@ string comboss::comboseleccionado(string idparacombo)
 
 void comboss::sordenusuario(int valor)
 {
-    int monedas[10]={50000,20000,10000,5000,2000,1000,500,200,100,50};
-    for(int i=0;i<10;i++){
-        int cantidad=valor/(*(monedas+i));
+    /*Estaes la implementación de el problema 1 de la practica 2 par el tema de realizción de pago al comprar un combo*/
+    int monedas[10]={50000,20000,10000,5000,2000,1000,500,200,100,50};      //arreglo de int
+    for(int i=0;i<10;i++){                                                  //ciclo que recorre el arreglo
+        int cantidad=valor/(*(monedas+i));                                  //operación matematica que hace uso del parametro
         if (cantidad != 0){
-            cout<<*(monedas+i)<<": "<<cantidad<<endl;
+            cout<<*(monedas+i)<<": "<<cantidad<<endl;                       //si la cantidad es distinta de 0 se imprimira el valor de la minima cnatidad de billetes o monedas posible para realizar el pago
         }
-        valor%=*(monedas+i);
+        valor%=*(monedas+i);                                                //se realiza otra operación matematica con los parametros para actualizar este mismo
     }
 }
 
@@ -405,7 +411,7 @@ string comboss::pagocomborealizado(int idparacombos)
     string datos,arr;
     string arreglo[funcionessss.cantidad3()][2];
     int contador1=0,contador2=0,restante,cantidad2=funcionessss.cantidad3();
-    ifstream registro;
+    ifstream registro;                                                          //ifsteram Para lectura en el archivo
     registro.open("../Desafio_evaluativo__/C_combos.txt", ios::in);
     if (registro.fail())
         cerr << "Error" << endl;
@@ -438,7 +444,7 @@ string comboss::pagocomborealizado(int idparacombos)
     restante=contadoressss-1;
     std::string numeroComoCadena = std::to_string(restante);
     arreglo[idparacombos-1][1]=numeroComoCadena;
-    ofstream registross;
+    ofstream registross;                                                        //ofstream Para escritura en el archivo
     registross.open("../Desafio_evaluativo__/C_combos.txt", ios::out);
     if (registross.fail())
         cerr << "Error" << endl;
@@ -459,6 +465,7 @@ string comboss::pagocomborealizado(int idparacombos)
 
 bool comboss::cntidadcombos(string idcc,string cantidad_combos)
 {
+    /*Se encarga de escribir la id con la cantidad de combos en un archivo de texto para luego manipular facilmente la cantidad de los combos*/
     ofstream registro;
     registro.open("../Desafio_evaluativo__/C_combos.txt", ios::app);
     if (registro.fail())
@@ -477,7 +484,7 @@ void comboss::cantidaddeproductosparaelcombo(int combo)
     bool flag=false;
     string arreglo[puntoycoma()][2];
     int contador1=0,contador2=0,cantidad2=puntoycoma();
-    ifstream registro;
+    ifstream registro;                                                            //ifsteram Para lectura en el archivo
     registro.open("../Desafio_evaluativo__/Codigocombos.txt", ios::in);
     if (registro.fail())
         cerr << "Error" << endl;
@@ -533,7 +540,7 @@ void comboss::cantidaddeproductosparaelcombo(int combo)
             arreglo[i][1]=primeraparte+'\n';
         }
     }
-    ofstream regi;
+    ofstream regi;                                                              //ofstream Para escritura en el archivo
     regi.open("../Desafio_evaluativo__/Codigocombos.txt", ios::out);
     if (regi.fail())
         cerr << "Error----------------" << endl;
@@ -558,7 +565,7 @@ string comboss::combosdisponibles()
     string datos,arr;
     string arreglo[funcionessss.cantidad3()][2];
     int contador1=0,contador2=0,restante,cantidad2=funcionessss.cantidad3();
-    ifstream registro;
+    ifstream registro;                                                              //ifsteram Para lectura en el archivo
     registro.open("../Desafio_evaluativo__/C_combos.txt", ios::in);
     if (registro.fail())
         cerr << "Error" << endl;
@@ -600,7 +607,7 @@ string comboss::combosdisponibles()
             w=arreglo[i][0];
             arreglo[i][0]="0";
             arreglo[i][1]="0";
-            ofstream regi;
+            ofstream regi;                                                      //ofstream Para escritura en el archivo
             regi.open("../Desafio_evaluativo__/C_combos.txt", ios::out);
             if (regi.fail())
                 cerr << "Error----------------" << endl;
@@ -637,7 +644,7 @@ string comboss::alteracionencombos(string numeroparacombos)
     string datos,arr;
     string arreglo[funcionessss.cantidad2()][3];
     int contador1=0,contador2=0,cantidad2=funcionessss.cantidad2(),contador44=0;
-    ifstream registro;
+    ifstream registro;                                                              //ifsteram Para lectura en el archivo
     registro.open("../Desafio_evaluativo__/Combos.txt", ios::in);
     if (registro.fail())
         cerr << "Error" << endl;
@@ -675,7 +682,7 @@ string comboss::alteracionencombos(string numeroparacombos)
             arreglo[i][0]="0";
             arreglo[i][1]="0";
             arreglo[i][2]="0";
-            ofstream regi;
+            ofstream regi;                                                      //ofstream Para escritura en el archivo
             regi.open("../Desafio_evaluativo__/Combos.txt", ios::out);
             if (regi.fail())
                 cerr << "Error----------------" << endl;
@@ -707,7 +714,7 @@ string comboss::alteracionencombos(string numeroparacombos)
 
 bool comboss::reportedeventas(string idparacomboss, string asiento, string sala, string UserName)
 {
-    ofstream registro;
+    ofstream registro;                                                              //ofstream Para escritura en el archivo
     registro.open("../Desafio_evaluativo__/Reportedeventas.txt", ios::app);
     if (registro.fail())
         cerr << "Error" << endl;
@@ -728,7 +735,7 @@ bool comboss::reportedeventas(string idparacomboss, string asiento, string sala,
 string comboss::reportedeventasimpresion()
 {
     string info;
-    ifstream registro;
+    ifstream registro;                                                          //ifsteram Para lectura en el archivo
     registro.open("../Desafio_evaluativo__/Reportedeventas.txt", ios::in);
     if (registro.fail())
         cerr << "Error" << endl;
