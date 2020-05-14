@@ -729,7 +729,7 @@ bool comboss::reportedeventas(string idparacomboss, string asiento, string sala,
         cerr << "Error" << endl;                                                        //imprime error y sale de la función
     registro<<"-El dia de hoy se realizo la venta del combo numero: ";                  //al final del archivo escribe -El dia de hoy se realizo la venta del combo numero:
     registro<<idparacomboss;                                                            //al final del archivo escribe un parametro llamado idparacombos
-    registro<<" al señor(a) con el usuario: ";                                          //al final del archivo escribe el señor(a)
+    registro<<" al cliente con el usuario: ";                                          //al final del archivo escribe el señor(a)
     registro<<UserName;                                                                 //al final del archivo escribe un parametro llamado UserName
     registro<<"\nel combo se le llevo a la sala: ";                                     //al final del archivo escribe el combo se le llevo al asiento:
     registro<<sala;                                                                     //al final del archivo escribe un parametro llamado sala

@@ -15,11 +15,11 @@ int main()
     bool confirmacion;          //declaración de un valor booleano
     char producto[100];         //declaración de un arreglo de chars, para una operación mas abajo para una frase sin espacios
     string UserName,clave1,id,cantidad,costo,producto1="",actualizar, nombrepararegistro,contrasenapararegistro;    //declaración de strings
-    string resultadocombo,idplus,informacion,idcombo,nombrecombo,combo,valor_combo,cantidad_combos;             //declaración de strings
+    string resultadocombo,idplus,informacion,idcombo,nombrecombo,combo,valor_combo,cantidad_combos,eleccion___;             //declaración de strings
     comboss Crearcomboss;                   //Conexión con la clase comboss
     acceso Usuario;                         //Conexión con la clase acceso
     int a, accion,adminprimeropcion,aentero,plusproductoexistente,temporal, pago,devuelta,cppc;     //declaración de enteros
-    int adminousuario=1,eleccion___;            //declaración de enteros
+    int adminousuario=1;            //declaración de enteros
     while (adminousuario==1){               //ciclo para la ventana inicial del programa
         cout<<"Que accion desea tomar:"<<endl;      //escribe en la ventana inicial lo que se encuentra entre comillas
         cout<<"1. Ingresar como Administrador."<<endl;          //escribe en la ventana inicial la opción de ingresar como administrador
@@ -27,7 +27,7 @@ int main()
         cout<<"3. Salir del programa."<<endl;           //escribe en la ventana inicial la opción de salir
         cin>>eleccion___;           //pide el dato definitivo para ingresar como admin, usuario o para salir del programa
         cout<<endl;             //Imprime un salto de linea
-        if(eleccion___==1){         //si decides ingresar como administrador
+        if(eleccion___=="1"){         //si decides ingresar como administrador
             cout<<"Ingrese Usuario: ";      //imprime en pantalla que ingrese el usuario
             cin>>UserName;          //pide el dato usuario
             clave1=Usuario.Desplegar();         //invoca a la funcion Desplegar que se encuentra el la clase acceso
@@ -63,7 +63,7 @@ int main()
                         cin >> accion;              //Pregunta cual acción de las anteriores desea ejecutar
                         if (accion==1){             //Acción para agregar usuarios al archivo de textos "usuarios" y de esta manera luego poder ingresar como este
                             cout<<"Ingrese el nombre del usuario: ";    cin>>nombrepararegistro;        //pregunta el usuario que desea usar
-                            cout<<"Ingrese la contraseña que desee: ";  cin>>contrasenapararegistro;    //pregunta la clave para el ingreso
+                            cout<<"Ingrese la clave que desee (favor evite los espacios en blanco): ";  cin>>contrasenapararegistro;    //pregunta la clave para el ingreso
                             Usuario.agregarusuario(nombrepararegistro,contrasenapararegistro);      //Invoca la función agregarusuario localizada en acceso con los parametros de usuario y contraseña
                         }
                         if (accion==2){             //Acción para ingresar productos al inventario
@@ -156,7 +156,7 @@ int main()
         }
 
 
-            if (eleccion___==2){            //Si ingresa como usuario
+            if (eleccion___=="2"){            //Si ingresa como usuario
                 string menu, idparacombo="0",numeroparacombo;       //definimos como strings
                 string segdaopcion,sala,asiento;                    //definimos como string
                 acceso Usuario;                                     //Conexion con la clase acceso
@@ -266,7 +266,7 @@ int main()
                     }
                 }
             }
-        if (eleccion___==3){        //en la ventana de inicio si desea salir del programa
+        if (eleccion___=="3"){        //en la ventana de inicio si desea salir del programa
             return 0;//finaliza el programa
         }
     }
