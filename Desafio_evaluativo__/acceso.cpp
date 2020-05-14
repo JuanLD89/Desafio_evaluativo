@@ -319,7 +319,13 @@ string acceso::generarid()
 
             }
     }
+    if (cantidad2==1){                                                      //cantidad3 tiene el numero correspondiente a la cantidad de saldos de linea de C_combos y si es igual a 1
+        cantidad2=2;                                                        //cantidad3 se le asigna el valor de 2
+    }
     datos=arreglo[cantidad2-2][0];                                          //a datos se le dara el valor de un string correspondiente a una id
+    if (datos==""){                                                           //si datos es igual a string vacio
+        datos="0";                                                            //datos de iguala a "0"
+    }
     return datos;                                                           //retorna una id
 }
 

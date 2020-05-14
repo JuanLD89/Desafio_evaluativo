@@ -454,12 +454,24 @@ string comboss::pagocomborealizado(int idparacombos)
 
             }
     }
-    datos=arreglo[idparacombos-1][1];                                           //a datos se le asigna el string guardadp  en una posiciión del arreglo
+    bool flags=false;
+    int cantidadparaarreglo,contadorparaintercambio=0;
+    for(int i=0;i<cantidad2-1;i++){
+        int idparacombos1=stoi(arreglo[i][0]);
+        contadorparaintercambio+=1;
+        if (idparacombos1==idparacombos){
+            flags=true;
+            cantidadparaarreglo=idparacombos1;
+            break;
+        }
+    }
+
+    datos=arreglo[contadorparaintercambio-1][1];                                           //a datos se le asigna el string guardadp  en una posiciión del arreglo
     int contadoressss=0;                                                        // se declara un int contador
     contadoressss=stoi(datos);                                                  //de string a entero
     restante=contadoressss-1;                                                   // se le resta una unidad al string antes convertido a string
     std::string numeroComoCadena = std::to_string(restante);                    //de int a string
-    arreglo[idparacombos-1][1]=numeroComoCadena;                                //se reemplaza la informacion correspondiente a est posición en el arreglo con un nuevo el mismo valor-1, por ello se necesito convertir a int
+    arreglo[contadorparaintercambio-1][1]=numeroComoCadena;                                //se reemplaza la informacion correspondiente a est posición en el arreglo con un nuevo el mismo valor-1, por ello se necesito convertir a int
     ofstream registross;                                                        //ofstream Para escritura en el archivo
     registross.open("../Desafio_evaluativo__/C_combos.txt", ios::out);          //abre el archivo de texto C_combos
     if (registross.fail())                                                      //si existe algún error al abrir el archivo
@@ -476,6 +488,7 @@ string comboss::pagocomborealizado(int idparacombos)
         }
     }
     registro.close();                                                           //cierra el archivo de texto
+    return "Gracias por su compra";
 }
 
 

@@ -13,7 +13,7 @@ using namespace std;
 int main()
 {
     bool confirmacion;          //declaración de un valor booleano
-    char producto[100];         //declaración de un arreglo de chars, para una operación mas abajo para una frase sin espacios
+    char producto[100],productol[100];         //declaración de un arreglo de chars, para una operación mas abajo para una frase sin espacios
     string UserName,clave1,id,cantidad,costo,producto1="",actualizar, nombrepararegistro,contrasenapararegistro;    //declaración de strings
     string resultadocombo,idplus,informacion,idcombo,nombrecombo,combo,valor_combo,cantidad_combos,eleccion___;             //declaración de strings
     comboss Crearcomboss;                   //Conexión con la clase comboss
@@ -64,7 +64,10 @@ int main()
                         if (accion==1){             //Acción para agregar usuarios al archivo de textos "usuarios" y de esta manera luego poder ingresar como este
                             cout<<"Ingrese el nombre del usuario: ";    cin>>nombrepararegistro;        //pregunta el usuario que desea usar
                             cout<<"Ingrese la clave que desee (favor evite los espacios en blanco): ";  cin>>contrasenapararegistro;    //pregunta la clave para el ingreso
-                            Usuario.agregarusuario(nombrepararegistro,contrasenapararegistro);      //Invoca la función agregarusuario localizada en acceso con los parametros de usuario y contraseña
+                            bool confirmacionnnnnnn=Usuario.agregarusuario(nombrepararegistro,contrasenapararegistro);      //Invoca la función agregarusuario localizada en acceso con los parametros de usuario y contraseña
+                            if(confirmacionnnnnnn==true){
+                                cout<<"Usuario creado exitosamente"<<endl;
+                            }
                         }
                         if (accion==2){             //Acción para ingresar productos al inventario
                             cout<<"1. Agregar producto existente al inventario"<<endl;      //Pregunta si el rpoducto es existente
@@ -77,14 +80,21 @@ int main()
                                 cout<<" ||               Inventario de productos                 ||"<<endl;
                                 cout<<" ||=======================================================||"<<endl;
                                 informacion=Usuario.inventario();       //Invoca la función inventario localizada en acceso
-                                cout<<endl;
-                                cout<<"Ingrese la ID del producto desea agregar: ";  cin>>idplus;       //pide la id de algún producto ya existente
-                                actualizar=Usuario.Cproductos((idplus+ ' '));   //Invoca la función Cproductos localizada en acceso
-                                string a = actualizar;          //denomina a a como string
-                                aentero= stoi(a);       //convertir string  a entero
-                                cout<<"Que cantidad desea agregar? ";
-                                cin>>plusproductoexistente;         //pide la cantidad que desea agregar
-                                Usuario.productexistente(aentero,plusproductoexistente,(idplus+ ' '));      //Invoca la función productoexistente localizada en acceso con los parametros de la id, el producto y la cantidad.
+                                if (informacion==""){
+                                    cout<<"No hay productos en el inventario....."<<endl;
+                                    cout<<endl;
+                                }
+                                else{
+                                    cout<<endl;
+                                    cout<<"Ingrese la ID del producto desea agregar: ";  cin>>idplus;       //pide la id de algún producto ya existente
+                                    actualizar=Usuario.Cproductos((idplus+ ' '));   //Invoca la función Cproductos localizada en acceso
+                                    string a = actualizar;          //denomina a a como string
+                                    aentero= stoi(a);       //convertir string  a entero
+                                    cout<<"Que cantidad desea agregar? ";
+                                    cin>>plusproductoexistente;         //pide la cantidad que desea agregar
+                                    Usuario.productexistente(aentero,plusproductoexistente,(idplus+ ' '));      //Invoca la función productoexistente localizada en acceso con los parametros de la id, el producto y la cantidad.
+
+                                }
                             }
                             if (adminprimeropcion == 2){        //Si el producto es nuevo
                                 id=Usuario.generarid();         //Invoca la función generarid localizada en acceso
@@ -120,7 +130,14 @@ int main()
                             temporal=stoi(idcombo);             //convierte string a entero
                             temporal+=1;                        //aumenta en una unidad para id
                             idcombo=to_string(temporal);        //converte de entero a string
-                            cout<<"Que nombre desea ponerle al combo?: ";  cin>>nombrecombo;    //pide el nombre del combo
+                            cout<<"Describa su combo: ";      //pide la descripcion del combo
+                            cin.ignore();           //cin dispone de ciertas ayudas que simplifican la lectura de datos
+
+                            cin.getline(productol,100);//obtienes la cadena completa del arreglo
+                            for(int  i = 0; productol[i] != 0;++i)
+                                if(productol[i] != 32)//32 significa espacio en codigo ascii!!
+                                    nombrecombo+=productol[i];     //Por esto necestimos es arreglo char, y asi todo se va guardando en un string
+
                             cout<<endl;
                             cout<<" ||=======================================================||"<<endl;
                             cout<<" ||               Inventario de productos                 ||"<<endl;
@@ -137,6 +154,7 @@ int main()
                             cout <<"-Esriba el valor que desea ponerle al combo: ";        cin >>valor_combo;
                             resultadocombo=Crearcomboss.productosdesencriptados(idcombo,nombrecombo,valor_combo);   //invoca la funcion productosdesencriptados() ubicada en la clase comboss con los parametros de id, nombre y precio
                             cout<<resultadocombo<<endl;
+                            nombrecombo="";
                             if (resultadocombo=="Combo creado...."){        //resultadocombo que retorna un string el cual puede se combo creado o cantidad insuficiente
                                 Crearcomboss.cntidadcombos(idcombo,cantidad_combos);        //invoca la funcion cantidadcombos() ubicada en la clase comboss
                             }
