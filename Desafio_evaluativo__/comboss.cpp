@@ -121,13 +121,25 @@ string comboss::productosdesencriptados(string idcombo,string nombrecombo,string
     int contadorespecial=0;
     string compara1,compara2;
     while(contadorespecial<puntoycoma()){                                           //contadorespecial iniciara en 0, y la funcion puntoycoma es la cantidad de puntos y coma +1 en el archivo de codigocombos
+        string compara4=arreg[c3][0];                                               //a compara4 se le agrega un valor del arreglo
+        size_t tam2= compara4.length();                                             //se saca el tamaño del string compara4
+        compara4.erase(tam2-1);                                                     //se borra el ultimo caracter del string
+        int conversion2=stoi(compara4);                                             //de string a int
+        string limiteproductos=func.generarid();                                    //se le da un string con un numero de otra función
+        size_t tam= limiteproductos.length();                                       //se saca el tamaño del string limiteproductos
+        limiteproductos.erase(tam-1);                                               //se borra el ultimo caracter del string
+        int conversion=stoi(limiteproductos);                                       //de string a int
+        if(conversion2>conversion){                                                 //se compara para saber si la id existe, ya que si una id es mayor a la maxima id de los productos esta no existe
+            return "Una de las ID no existe.....";                                  //retorna "Una de las ID no existe....." y sale de la función
+        }
         compara1=arreglo[c1][c2];                                                   //en esta linea y la siguiente se asignan valores para comparar entre codigocombos y productos
         compara2=arreg[c3][0];
         compara1+=' ';
         if(contadorespecial==puntoycoma()-1){                                       //para parar el ciclo
             break;
         }
-        if (compara1==compara2){                                                     //comparar entre cantidad en codigocombos y cantidad de productos, para saber si es posible realizar el combo con la cantidad deseada
+
+        if (compara1==compara2){                                                     //comparar entre id en codigocombos y id de productos, para saber si es posible realizar el combo
             c2+=1;                                                                   //aumenta c2 en una unidad
             temporal_=stoi(arreg[c3][2]);                                            //de string a int
             temporal_2=stoi(arreglo[c1][c2]);                                        //de string a int
